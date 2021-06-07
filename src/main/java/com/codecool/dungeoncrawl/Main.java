@@ -3,6 +3,7 @@ package com.codecool.dungeoncrawl;
 import com.codecool.dungeoncrawl.logic.Cell;
 import com.codecool.dungeoncrawl.logic.GameMap;
 import com.codecool.dungeoncrawl.logic.MapLoader;
+import com.codecool.dungeoncrawl.logic.Movement;
 import javafx.application.Application;
 import javafx.geometry.Insets;
 import javafx.scene.Scene;
@@ -22,6 +23,8 @@ public class Main extends Application {
             map.getHeight() * Tiles.TILE_WIDTH);
     GraphicsContext context = canvas.getGraphicsContext2D();
     Label healthLabel = new Label();
+    Movement movement = new Movement(map);
+
 
     public static void main(String[] args) {
         launch(args);
@@ -53,19 +56,27 @@ public class Main extends Application {
     private void onKeyPressed(KeyEvent keyEvent) {
         switch (keyEvent.getCode()) {
             case UP:
-                map.getPlayer().move(0, -1);
+                if (movement.movementCheck(0, - 1)) {
+                    map.getPlayer().move(0, -1);
+                }
                 refresh();
                 break;
             case DOWN:
-                map.getPlayer().move(0, 1);
+                if (movement.movementCheck(0, 1)) {
+                    map.getPlayer().move(0, 1);
+                }
                 refresh();
                 break;
             case LEFT:
-                map.getPlayer().move(-1, 0);
+                if (movement.movementCheck(- 1, 0)) {
+                    map.getPlayer().move(-1, 0);
+                }
                 refresh();
                 break;
             case RIGHT:
-                map.getPlayer().move(1,0);
+                if (movement.movementCheck(1, 0)) {
+                    map.getPlayer().move(1,0);
+                }
                 refresh();
                 break;
         }
