@@ -1,15 +1,13 @@
 package com.codecool.dungeoncrawl;
 
-import com.codecool.dungeoncrawl.logic.Cell;
-import com.codecool.dungeoncrawl.logic.GameMap;
-import com.codecool.dungeoncrawl.logic.MapLoader;
-import com.codecool.dungeoncrawl.logic.Movement;
+import com.codecool.dungeoncrawl.logic.*;
 import com.codecool.dungeoncrawl.logic.popups.NamePopup;
 import javafx.application.Application;
 import javafx.geometry.Insets;
 import javafx.scene.Scene;
 import javafx.scene.canvas.Canvas;
 import javafx.scene.canvas.GraphicsContext;
+import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.input.KeyEvent;
 import javafx.scene.layout.BorderPane;
@@ -71,6 +69,10 @@ public class Main extends Application {
         ui.add(nameLabel, 1, 1);
 
         BorderPane borderPane = new BorderPane();
+
+        Button pickUpButton = new Button("Pick item");
+        pickUpButton.setOnAction(new PickupHandler(map, borderPane));
+        ui.add(pickUpButton, 0 , 20);
 
         borderPane.setCenter(canvas);
         borderPane.setRight(ui);
