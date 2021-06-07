@@ -4,6 +4,7 @@ import com.codecool.dungeoncrawl.logic.Cell;
 import com.codecool.dungeoncrawl.logic.GameMap;
 import com.codecool.dungeoncrawl.logic.MapLoader;
 import com.codecool.dungeoncrawl.logic.Movement;
+import com.codecool.dungeoncrawl.logic.popups.NamePopup;
 import javafx.application.Application;
 import javafx.geometry.Insets;
 import javafx.scene.Scene;
@@ -23,7 +24,9 @@ public class Main extends Application {
             map.getHeight() * Tiles.TILE_WIDTH);
     GraphicsContext context = canvas.getGraphicsContext2D();
     Label healthLabel = new Label();
+    Label nameLabel = new Label();
     Movement movement = new Movement(map);
+    private String name = "Crawl";
 
 
     public static void main(String[] args) {
@@ -31,13 +34,41 @@ public class Main extends Application {
     }
 
     @Override
-    public void start(Stage primaryStage) throws Exception {
+    public void start(Stage primaryStage) {
+        NamePopup.display("Enter your name:", "Play");
+//        GridPane ui = new GridPane();
+//        ui.setPrefWidth(200);
+//        ui.setPadding(new Insets(10));
+//
+//        ui.add(new Label("Health: "), 0, 0);
+//        ui.add(healthLabel, 1, 0);
+//
+//        BorderPane borderPane = new BorderPane();
+//
+//        borderPane.setCenter(canvas);
+//        borderPane.setRight(ui);
+//
+//        Scene scene = new Scene(borderPane);
+//        primaryStage.setScene(scene);
+//        refresh();
+//        scene.setOnKeyPressed(this::onKeyPressed);
+//
+//        primaryStage.setTitle("Dungeon Crawl");
+//        primaryStage.show();
+    }
+
+    public void run(Stage primaryStage, String name) {
+        this.name = name;
+
         GridPane ui = new GridPane();
-        ui.setPrefWidth(200);
+        ui.setPrefWidth(300);
         ui.setPadding(new Insets(10));
 
         ui.add(new Label("Health: "), 0, 0);
         ui.add(healthLabel, 1, 0);
+
+        ui.add(new Label("Name: "), 0, 1);
+        ui.add(nameLabel, 1, 1);
 
         BorderPane borderPane = new BorderPane();
 
@@ -51,30 +82,31 @@ public class Main extends Application {
 
         primaryStage.setTitle("Dungeon Crawl");
         primaryStage.show();
+        borderPane.requestFocus();
     }
 
     private void onKeyPressed(KeyEvent keyEvent) {
         switch (keyEvent.getCode()) {
             case UP:
-                if (movement.movementCheck(0, - 1)) {
+                if (movement.movementCheck(0, - 1) || name.equals("Bogdan")) {
                     map.getPlayer().move(0, -1);
                 }
                 refresh();
                 break;
             case DOWN:
-                if (movement.movementCheck(0, 1)) {
+                if (movement.movementCheck(0, 1) || name.equals("Bogdan")) {
                     map.getPlayer().move(0, 1);
                 }
                 refresh();
                 break;
             case LEFT:
-                if (movement.movementCheck(- 1, 0)) {
+                if (movement.movementCheck(- 1, 0) || name.equals("Bogdan")) {
                     map.getPlayer().move(-1, 0);
                 }
                 refresh();
                 break;
             case RIGHT:
-                if (movement.movementCheck(1, 0)) {
+                if (movement.movementCheck(1, 0) || name.equals("Bogdan")) {
                     map.getPlayer().move(1,0);
                 }
                 refresh();
@@ -98,5 +130,6 @@ public class Main extends Application {
             }
         }
         healthLabel.setText("" + map.getPlayer().getHealth());
+        nameLabel.setText("" + name);
     }
 }
