@@ -36,6 +36,9 @@ public class MapLoader {
                         case '.':
                             cell.setType(CellType.FLOOR);
                             break;
+                        case 't':
+                            cell.setType(CellType.TREE);
+                            break;
                         case 's':
                             cell.setType(CellType.FLOOR);
                             new Skeleton(cell);
@@ -60,6 +63,7 @@ public class MapLoader {
                             new Crown(cell);
                             break;
                         case 'n':
+                            System.out.println("knight");
                             cell.setType(CellType.FLOOR);
                             new Knight(cell, x, y);
                             break;

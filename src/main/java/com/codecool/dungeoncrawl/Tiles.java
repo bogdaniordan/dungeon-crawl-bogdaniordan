@@ -34,6 +34,7 @@ public class Tiles {
         tileMap.put("cross", new Tile(26,12));
         tileMap.put("crown", new Tile(12,24));
         tileMap.put("knight", new Tile(29, 0));
+        tileMap.put("tree", new Tile(0, 1));
 
     }
 

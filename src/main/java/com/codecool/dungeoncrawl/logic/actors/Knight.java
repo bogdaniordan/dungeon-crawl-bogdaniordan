@@ -34,24 +34,21 @@ public class Knight extends Actor {
         NORTH, SOUTH, WEST, EAST
     }
 
-//    public void moveKnight() {
-////        System.out.println(X);
-////        System.out.println(Y);
-////        System.out.println(direction);
-//        if (direction == directionType.NORTH) {
-//            X--;
-//            direction = directionType.WEST;
-//        } else if (direction == directionType.WEST) {
-//            Y++;
-//            direction = directionType.SOUTH;
-//        } else if (direction == directionType.SOUTH) {
-//            X++;
-//            direction = directionType.EAST;
-//        } else if (direction == directionType.EAST) {
-//            Y--;
-//            direction = directionType.NORTH;
-//        }
-//    }
+    public void moveKnight() {
+        if (direction == directionType.NORTH) {
+            X--;
+            direction = directionType.WEST;
+        } else if (direction == directionType.WEST) {
+            Y++;
+            direction = directionType.SOUTH;
+        } else if (direction == directionType.SOUTH) {
+            X++;
+            direction = directionType.EAST;
+        } else if (direction == directionType.EAST) {
+            Y--;
+            direction = directionType.NORTH;
+        }
+    }
 
     @Override
     public String getTileName() { return "knight"; }

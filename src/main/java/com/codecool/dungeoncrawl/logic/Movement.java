@@ -1,5 +1,9 @@
 package com.codecool.dungeoncrawl.logic;
 
+import com.codecool.dungeoncrawl.Tiles;
+import com.codecool.dungeoncrawl.logic.actors.Knight;
+import javafx.scene.canvas.GraphicsContext;
+
 public class Movement {
 
     private final GameMap map;
@@ -23,9 +27,4 @@ public class Movement {
         };
         return false;
     }
-
-    public void enemyMovement() {
-
-    }
-
 }

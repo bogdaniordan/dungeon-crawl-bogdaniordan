@@ -1,6 +1,7 @@
 package com.codecool.dungeoncrawl;
 
 import com.codecool.dungeoncrawl.logic.*;
+import com.codecool.dungeoncrawl.logic.actors.Knight;
 import com.codecool.dungeoncrawl.logic.popups.NamePopup;
 import javafx.application.Application;
 import javafx.geometry.Insets;
@@ -105,6 +106,7 @@ public class Main extends Application {
     }
 
     private void refresh() {
+        int knightMoveCounter = 0;
         context.setFill(Color.BLACK);
         context.fillRect(0, 0, canvas.getWidth(), canvas.getHeight());
         for (int x = 0; x < map.getWidth(); x++) {
@@ -112,6 +114,14 @@ public class Main extends Application {
                 Cell cell = map.getCell(x, y);
                 if (cell.getActor() != null) {
                     Tiles.drawTile(context, cell.getActor(), x, y);
+                    if (cell.getActor() instanceof Knight) {
+                        ((Knight) cell.getActor()).moveKnight();
+                        if (knightMoveCounter == 0) {
+                            map.getCell(((Knight) cell.getActor()).getKnightX(), ((Knight) cell.getActor()).getKnightY()).setActor(cell.getActor());
+                            cell.setActor(null);
+                            knightMoveCounter = 1;
+                        }
+                    }
                 } else if (cell.getItem() != null) {
                     Tiles.drawTile(context, cell.getItem(), x, y);
                 } else {
