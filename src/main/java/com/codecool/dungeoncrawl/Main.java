@@ -26,6 +26,7 @@ public class Main extends Application {
     Label healthLabel = new Label();
     Label nameLabel = new Label();
     Movement movement = new Movement(map);
+    ItemEffect itemEffect = new ItemEffect();
     private String name = "Crawl";
 
 
@@ -73,7 +74,7 @@ public class Main extends Application {
         BorderPane borderPane = new BorderPane();
 
         Button pickUpButton = new Button("Pick item");
-        pickUpButton.setOnAction(new PickupHandler(map, borderPane));
+        pickUpButton.setOnAction(new PickupHandler(map, borderPane, itemEffect));
         ui.add(pickUpButton, 0 , 20);
 
         borderPane.setCenter(canvas);
