@@ -37,25 +37,6 @@ public class Main extends Application {
     @Override
     public void start(Stage primaryStage) {
         NamePopup.display("Enter your name:", "Play");
-//        GridPane ui = new GridPane();
-//        ui.setPrefWidth(200);
-//        ui.setPadding(new Insets(10));
-//
-//        ui.add(new Label("Health: "), 0, 0);
-//        ui.add(healthLabel, 1, 0);
-//
-//        BorderPane borderPane = new BorderPane();
-//
-//        borderPane.setCenter(canvas);
-//        borderPane.setRight(ui);
-//
-//        Scene scene = new Scene(borderPane);
-//        primaryStage.setScene(scene);
-//        refresh();
-//        scene.setOnKeyPressed(this::onKeyPressed);
-//
-//        primaryStage.setTitle("Dungeon Crawl");
-//        primaryStage.show();
     }
 
     public void run(Stage primaryStage, String name) {

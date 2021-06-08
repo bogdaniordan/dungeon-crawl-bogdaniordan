@@ -24,4 +24,8 @@ public class Movement {
         return false;
     }
 
+    public void enemyMovement() {
+
+    }
+
 }

@@ -19,7 +19,7 @@ public class ItemEffect {
         }
     }
 
-    public void pickUpCrown(Cell cell, GameMap map) {
+    public void pickUpCrown(Cell cell) {
         if (cell.getItem() instanceof Crown) {
             GameVerdictPopup.display("You found the crown!", "Play again");
         }
