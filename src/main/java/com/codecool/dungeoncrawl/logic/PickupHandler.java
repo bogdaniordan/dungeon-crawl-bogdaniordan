@@ -1,10 +1,9 @@
 package com.codecool.dungeoncrawl.logic;
 
-import com.codecool.dungeoncrawl.logic.Cell;
-import com.codecool.dungeoncrawl.logic.GameMap;
+import com.codecool.dungeoncrawl.logic.items.Cross;
+import com.codecool.dungeoncrawl.logic.items.Crown;
 import com.codecool.dungeoncrawl.logic.items.Sword;
-import javafx.scene.layout.BorderPane;
-
+import com.codecool.dungeoncrawl.logic.popups.GameVerdictPopup;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.scene.layout.BorderPane;
@@ -22,8 +21,9 @@ public class PickupHandler implements EventHandler<ActionEvent> {
     public void handle(ActionEvent actionEvent) {
         Cell cell = map.getCell(map.getPlayer().getX(), map.getPlayer().getY());
         if (cell.getItem() != null) {
-            map.getPlayer().addToInventory(cell.getItem());
             increasePlayerDamage(cell);
+            increasePlayerHealth(cell);
+            pickUpCrown(cell);
             cell.setItem(null);
         }
         borderPane.requestFocus();
@@ -32,6 +32,18 @@ public class PickupHandler implements EventHandler<ActionEvent> {
     private void increasePlayerDamage(Cell cell) {
         if (cell.getItem() instanceof Sword) {
             map.getPlayer().increaseDamage(((Sword) cell.getItem()).getDamage());
+        }
+    }
+
+    private void increasePlayerHealth(Cell cell) {
+        if (cell.getItem() instanceof Cross) {
+            map.getPlayer().increaseHealth(((Cross) cell.getItem()).getGivenHp());
+        }
+    }
+
+    private void pickUpCrown(Cell cell) {
+        if (cell.getItem() instanceof Crown) {
+            GameVerdictPopup.display("You found the crown!", "Play again");
         }
     }
 }

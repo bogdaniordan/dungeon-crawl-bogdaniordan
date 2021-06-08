@@ -30,6 +30,10 @@ public abstract class Actor implements Drawable {
         damage += increaseValue;
     }
 
+    public void increaseHealth(int health) {
+        this.health += health;
+    }
+
     public int getHealth() {
         return health;
     }

@@ -148,7 +148,7 @@ public class Main extends Application {
             movement = new Movement(map);
             map.getPlayer().setDamage(oldDamage);
             map.getPlayer().setHealth(oldHealth);
-            run(new Stage(), name); //am pus run in loc de start ca aparea pop-up
+            run(new Stage(), name);
         }
     }
 }
