@@ -24,12 +24,18 @@ public abstract class Actor implements Drawable {
         this.damage = damage;
     }
 
+    public int getDamage() {return damage;}
+
     public void increaseDamage(int increaseValue) {
         damage += increaseValue;
     }
 
     public int getHealth() {
         return health;
+    }
+
+    public void setHealth(int health) {
+        this.health = health;
     }
 
     public Cell getCell() {

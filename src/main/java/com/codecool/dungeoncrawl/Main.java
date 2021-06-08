@@ -16,7 +16,9 @@ import javafx.scene.paint.Color;
 import javafx.stage.Stage;
 
 public class Main extends Application {
-    GameMap map = MapLoader.loadMap();
+
+    private String currentMap = "/map.txt";
+    GameMap map = MapLoader.loadMap(currentMap);
     Canvas canvas = new Canvas(
             map.getWidth() * Tiles.TILE_WIDTH,
             map.getHeight() * Tiles.TILE_WIDTH);
@@ -92,24 +94,28 @@ public class Main extends Application {
             case UP:
                 if (movement.movementCheck(0, - 1) || name.equals("Bogdan")) {
                     map.getPlayer().move(0, -1);
+                    teleportToSecondMap(map.getPlayer().getHealth(), map.getPlayer().getDamage());
                 }
                 refresh();
                 break;
             case DOWN:
                 if (movement.movementCheck(0, 1) || name.equals("Bogdan")) {
                     map.getPlayer().move(0, 1);
+                    teleportToSecondMap(map.getPlayer().getHealth(), map.getPlayer().getDamage());
                 }
                 refresh();
                 break;
             case LEFT:
                 if (movement.movementCheck(- 1, 0) || name.equals("Bogdan")) {
                     map.getPlayer().move(-1, 0);
+                    teleportToSecondMap(map.getPlayer().getHealth(), map.getPlayer().getDamage());
                 }
                 refresh();
                 break;
             case RIGHT:
                 if (movement.movementCheck(1, 0) || name.equals("Bogdan")) {
                     map.getPlayer().move(1,0);
+                    teleportToSecondMap(map.getPlayer().getHealth(), map.getPlayer().getDamage());
                 }
                 refresh();
                 break;
@@ -133,5 +139,16 @@ public class Main extends Application {
         }
         healthLabel.setText("" + map.getPlayer().getHealth());
         nameLabel.setText("" + name);
+    }
+
+    private void teleportToSecondMap(int oldHealth,int oldDamage) {
+        if (map.getCell(map.getPlayer().getX(), map.getPlayer().getY()).getType() == CellType.STAIRS) {
+            currentMap = "/second_map.txt";
+            map = MapLoader.loadMap(currentMap);
+            movement = new Movement(map);
+            map.getPlayer().setDamage(oldDamage);
+            map.getPlayer().setHealth(oldHealth);
+            run(new Stage(), name); //am pus run in loc de start ca aparea pop-up
+        }
     }
 }

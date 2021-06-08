@@ -13,7 +13,8 @@ public class Movement {
     }
 
     private boolean cellIsNotWall(int x, int y) {
-        return map.getCell(map.getPlayer().getX() + x, map.getPlayer().getY() + y).getType() == CellType.FLOOR;
+        return map.getCell(map.getPlayer().getX() + x, map.getPlayer().getY() + y).getType() == CellType.FLOOR ||
+                map.getCell(map.getPlayer().getX() + x, map.getPlayer().getY() + y).getType() == CellType.STAIRS;
     }
 
     public boolean movementCheck(int x, int y) {
