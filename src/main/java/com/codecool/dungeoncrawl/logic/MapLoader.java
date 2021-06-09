@@ -1,6 +1,7 @@
 package com.codecool.dungeoncrawl.logic;
 
 import com.codecool.dungeoncrawl.logic.actors.Knight;
+import com.codecool.dungeoncrawl.logic.actors.Monster;
 import com.codecool.dungeoncrawl.logic.actors.Player;
 import com.codecool.dungeoncrawl.logic.actors.Skeleton;
 import com.codecool.dungeoncrawl.logic.items.Cross;
@@ -65,6 +66,10 @@ public class MapLoader {
                         case 'n':
                             cell.setType(CellType.FLOOR);
                             new Knight(cell, x, y);
+                            break;
+                        case 'm':
+                            cell.setType(CellType.FLOOR);
+                            new Monster(cell);
                             break;
                         case 'd':
                             cell.setType(CellType.CLOSED_DOOR);

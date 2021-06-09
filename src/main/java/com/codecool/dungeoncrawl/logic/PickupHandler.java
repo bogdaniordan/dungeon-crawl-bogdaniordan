@@ -19,6 +19,7 @@ public class PickupHandler implements EventHandler<ActionEvent> {
     public void handle(ActionEvent actionEvent) {
         Cell cell = map.getCell(map.getPlayer().getX(), map.getPlayer().getY());
         if (cell.getItem() != null) {
+            map.getPlayer().addToInventory(cell.getItem());
             itemEffect.increasePlayerDamage(cell, map);
             itemEffect.increasePlayerHealth(cell, map);
             itemEffect.pickUpCrown(cell);

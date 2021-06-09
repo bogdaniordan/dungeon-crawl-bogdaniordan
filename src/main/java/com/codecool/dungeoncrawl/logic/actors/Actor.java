@@ -20,6 +20,10 @@ public abstract class Actor implements Drawable {
         cell = nextCell;
     }
 
+    public void setCell(Cell cell) {
+        this.cell = cell;
+    }
+
     public void setDamage(int damage) {
         this.damage = damage;
     }

@@ -37,15 +37,19 @@ public class Knight extends Actor {
     public void moveKnight() {
         if (direction == directionType.NORTH) {
             X--;
+//            move(- 1 , 0);
             direction = directionType.WEST;
         } else if (direction == directionType.WEST) {
             Y++;
+//            move(0, 1);
             direction = directionType.SOUTH;
         } else if (direction == directionType.SOUTH) {
             X++;
+//            move(1, 0);
             direction = directionType.EAST;
         } else if (direction == directionType.EAST) {
             Y--;
+//            move(0, - 1);
             direction = directionType.NORTH;
         }
     }

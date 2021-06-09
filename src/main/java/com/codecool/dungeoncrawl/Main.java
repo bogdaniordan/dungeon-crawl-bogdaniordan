@@ -2,6 +2,8 @@ package com.codecool.dungeoncrawl;
 
 import com.codecool.dungeoncrawl.logic.*;
 import com.codecool.dungeoncrawl.logic.actors.Knight;
+import com.codecool.dungeoncrawl.logic.actors.Monster;
+import com.codecool.dungeoncrawl.logic.items.Item;
 import com.codecool.dungeoncrawl.logic.popups.NamePopup;
 import javafx.application.Application;
 import javafx.geometry.Insets;
@@ -16,6 +18,8 @@ import javafx.scene.layout.GridPane;
 import javafx.scene.paint.Color;
 import javafx.stage.Stage;
 
+import java.util.List;
+
 public class Main extends Application {
 
     private String currentMap = "/map.txt";
@@ -26,6 +30,8 @@ public class Main extends Application {
     GraphicsContext context = canvas.getGraphicsContext2D();
     Label healthLabel = new Label();
     Label nameLabel = new Label();
+    Label damageLabel = new Label();
+    Label inventoryItems = new Label();
     Movement movement = new Movement(map);
     ItemEffect itemEffect = new ItemEffect();
     private String name = "Crawl";
@@ -50,8 +56,15 @@ public class Main extends Application {
         ui.add(new Label("Health: "), 0, 0);
         ui.add(healthLabel, 1, 0);
 
-        ui.add(new Label("Name: "), 0, 1);
-        ui.add(nameLabel, 1, 1);
+        ui.add(new Label("Damage: "), 0, 1);
+        ui.add(damageLabel, 1, 1);
+
+        ui.add(new Label("Inventory: "), 0, 2);
+        ui.add(inventoryItems, 1, 2);
+
+        ui.add(new Label("Name: "), 0, 3);
+        ui.add(nameLabel, 1, 3);
+
 
         BorderPane borderPane = new BorderPane();
 
@@ -77,28 +90,28 @@ public class Main extends Application {
             case UP:
                 if (movement.movementCheck(0, - 1) || name.equals("Bogdan")) {
                     map.getPlayer().move(0, -1);
-                    teleportToSecondMap(map.getPlayer().getHealth(), map.getPlayer().getDamage());
+                    teleportToSecondMap(map.getPlayer().getHealth(), map.getPlayer().getInventory(),map.getPlayer().getDamage());
                 }
                 refresh();
                 break;
             case DOWN:
                 if (movement.movementCheck(0, 1) || name.equals("Bogdan")) {
                     map.getPlayer().move(0, 1);
-                    teleportToSecondMap(map.getPlayer().getHealth(), map.getPlayer().getDamage());
+                    teleportToSecondMap(map.getPlayer().getHealth(),map.getPlayer().getInventory(), map.getPlayer().getDamage());
                 }
                 refresh();
                 break;
             case LEFT:
                 if (movement.movementCheck(- 1, 0) || name.equals("Bogdan")) {
                     map.getPlayer().move(-1, 0);
-                    teleportToSecondMap(map.getPlayer().getHealth(), map.getPlayer().getDamage());
+                    teleportToSecondMap(map.getPlayer().getHealth(), map.getPlayer().getInventory(),map.getPlayer().getDamage());
                 }
                 refresh();
                 break;
             case RIGHT:
                 if (movement.movementCheck(1, 0) || name.equals("Bogdan")) {
                     map.getPlayer().move(1,0);
-                    teleportToSecondMap(map.getPlayer().getHealth(), map.getPlayer().getDamage());
+                    teleportToSecondMap(map.getPlayer().getHealth(), map.getPlayer().getInventory(),map.getPlayer().getDamage());
                 }
                 refresh();
                 break;
@@ -116,11 +129,17 @@ public class Main extends Application {
                     Tiles.drawTile(context, cell.getActor(), x, y);
                     if (cell.getActor() instanceof Knight) {
                         ((Knight) cell.getActor()).moveKnight();
+//                        int knightX = ((Knight) cell.getActor()).getKnightX();
+//                        int knightY = ((Knight) cell.getActor()).getKnightY();
+//                        ((Knight) cell.getActor()).move(knightX, knightY);
+//                        cell.setActor(null);
                         if (knightMoveCounter == 0) {
                             map.getCell(((Knight) cell.getActor()).getKnightX(), ((Knight) cell.getActor()).getKnightY()).setActor(cell.getActor());
                             cell.setActor(null);
                             knightMoveCounter = 1;
                         }
+                    } else if (cell.getActor() instanceof Monster) {
+                        ((Monster) cell.getActor()).attackPlayer(map);
                     }
                 } else if (cell.getItem() != null) {
                     Tiles.drawTile(context, cell.getItem(), x, y);
@@ -130,16 +149,19 @@ public class Main extends Application {
             }
         }
         healthLabel.setText("" + map.getPlayer().getHealth());
+        damageLabel.setText("" + map.getPlayer().getDamage());
+        inventoryItems.setText("" + Utils.addItemsInventoryScreen(map));
         nameLabel.setText("" + name);
     }
 
-    private void teleportToSecondMap(int oldHealth,int oldDamage) {
+    private void teleportToSecondMap(int oldHealth, List<Item> oldItems, int oldDamage) {
         if (map.getCell(map.getPlayer().getX(), map.getPlayer().getY()).getType() == CellType.STAIRS) {
             currentMap = "/second_map.txt";
             map = MapLoader.loadMap(currentMap);
             movement = new Movement(map);
             map.getPlayer().setDamage(oldDamage);
             map.getPlayer().setHealth(oldHealth);
+            map.getPlayer().setInventory(oldItems);
             run(new Stage(), name);
         }
     }
