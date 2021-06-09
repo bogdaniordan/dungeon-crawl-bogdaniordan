@@ -37,6 +37,7 @@ public class Movement {
     private void fireCheck(int x, int y) {
         if (map.getCell(map.getPlayer().getX() + x, map.getPlayer().getY() + y).getType() == CellType.FIRE) {
             map.getPlayer().decreaseHealth(1);
+            fight.gameLost();
         }
     }
 }
