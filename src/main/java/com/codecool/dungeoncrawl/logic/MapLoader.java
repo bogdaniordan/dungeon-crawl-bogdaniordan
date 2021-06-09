@@ -63,9 +63,11 @@ public class MapLoader {
                             new Crown(cell);
                             break;
                         case 'n':
-                            System.out.println("knight");
                             cell.setType(CellType.FLOOR);
                             new Knight(cell, x, y);
+                            break;
+                        case 'd':
+                            cell.setType(CellType.CLOSED_DOOR);
                             break;
                         case '@':
                             cell.setType(CellType.FLOOR);

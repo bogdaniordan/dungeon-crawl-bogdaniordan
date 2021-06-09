@@ -1,9 +1,5 @@
 package com.codecool.dungeoncrawl.logic;
 
-import com.codecool.dungeoncrawl.Tiles;
-import com.codecool.dungeoncrawl.logic.actors.Knight;
-import javafx.scene.canvas.GraphicsContext;
-
 public class Movement {
 
     private final GameMap map;
@@ -18,7 +14,8 @@ public class Movement {
 
     private boolean cellIsNotWall(int x, int y) {
         return map.getCell(map.getPlayer().getX() + x, map.getPlayer().getY() + y).getType() == CellType.FLOOR ||
-                map.getCell(map.getPlayer().getX() + x, map.getPlayer().getY() + y).getType() == CellType.STAIRS;
+                map.getCell(map.getPlayer().getX() + x, map.getPlayer().getY() + y).getType() == CellType.STAIRS ||
+                map.getCell(map.getPlayer().getX() + x, map.getPlayer().getY() + y).getType() == CellType.OPEN_DOOR;
     }
 
     public boolean movementCheck(int x, int y) {

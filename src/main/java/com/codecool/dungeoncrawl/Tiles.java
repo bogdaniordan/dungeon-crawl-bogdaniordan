@@ -35,6 +35,8 @@ public class Tiles {
         tileMap.put("crown", new Tile(12,24));
         tileMap.put("knight", new Tile(29, 0));
         tileMap.put("tree", new Tile(0, 1));
+        tileMap.put("closed_door", new Tile(0, 9));
+        tileMap.put("open_door", new Tile(2, 9));
 
     }
 
