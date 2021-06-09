@@ -5,29 +5,10 @@ import com.codecool.dungeoncrawl.logic.Cell;
 public class Knight extends Actor {
     public directionType direction = directionType.NORTH;
 
-    private int X;
-
-    private int Y;
-
-
-    public Knight(Cell cell, int xCoordinate, int yCoordinate) {
+    public Knight(Cell cell) {
         super(cell);
-        setCoordinates(xCoordinate, yCoordinate);
         setDamage(3);
         setHealth(13);
-    }
-
-    private void setCoordinates(int xCoordinate, int yCoordinate) {
-        X = xCoordinate;
-        Y = yCoordinate;
-    }
-
-    public int getKnightX() {
-        return X;
-    }
-
-    public int getKnightY() {
-        return Y;
     }
 
     public enum directionType {
@@ -36,20 +17,16 @@ public class Knight extends Actor {
 
     public void moveKnight() {
         if (direction == directionType.NORTH) {
-            X--;
-//            move(- 1 , 0);
+            move(- 1 , 0);
             direction = directionType.WEST;
         } else if (direction == directionType.WEST) {
-            Y++;
-//            move(0, 1);
+            move(0, 1);
             direction = directionType.SOUTH;
         } else if (direction == directionType.SOUTH) {
-            X++;
-//            move(1, 0);
+            move(1, 0);
             direction = directionType.EAST;
         } else if (direction == directionType.EAST) {
-            Y--;
-//            move(0, - 1);
+            move(0, - 1);
             direction = directionType.NORTH;
         }
     }

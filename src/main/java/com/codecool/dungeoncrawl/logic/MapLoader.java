@@ -65,7 +65,7 @@ public class MapLoader {
                             break;
                         case 'n':
                             cell.setType(CellType.FLOOR);
-                            new Knight(cell, x, y);
+                            new Knight(cell);
                             break;
                         case 'm':
                             cell.setType(CellType.FLOOR);

@@ -120,6 +120,7 @@ public class Main extends Application {
 
     private void refresh() {
         int knightMoveCounter = 0;
+        int c = 0;
         context.setFill(Color.BLACK);
         context.fillRect(0, 0, canvas.getWidth(), canvas.getHeight());
         for (int x = 0; x < map.getWidth(); x++) {
@@ -128,18 +129,27 @@ public class Main extends Application {
                 if (cell.getActor() != null) {
                     Tiles.drawTile(context, cell.getActor(), x, y);
                     if (cell.getActor() instanceof Knight) {
-                        ((Knight) cell.getActor()).moveKnight();
+                        if (knightMoveCounter == 0) {
+                            ((Knight) cell.getActor()).moveKnight();
+                            knightMoveCounter++;
+                        }
+
 //                        int knightX = ((Knight) cell.getActor()).getKnightX();
 //                        int knightY = ((Knight) cell.getActor()).getKnightY();
 //                        ((Knight) cell.getActor()).move(knightX, knightY);
 //                        cell.setActor(null);
-                        if (knightMoveCounter == 0) {
-                            map.getCell(((Knight) cell.getActor()).getKnightX(), ((Knight) cell.getActor()).getKnightY()).setActor(cell.getActor());
-                            cell.setActor(null);
-                            knightMoveCounter = 1;
-                        }
+//                        if (knightMoveCounter == 0) {
+//                            map.getCell(((Knight) cell.getActor()).getKnightX(), ((Knight) cell.getActor()).getKnightY()).setActor(cell.getActor());
+//                            cell.setActor(null);
+//                            knightMoveCounter = 1;
+//                        }
                     } else if (cell.getActor() instanceof Monster) {
-                        ((Monster) cell.getActor()).attackPlayer(map);
+//                        System.out.println("EXD");
+                        if (c == 0) {
+                            ((Monster) cell.getActor()).attackPlayer(map);
+                            c++;
+                        }
+
                     }
                 } else if (cell.getItem() != null) {
                     Tiles.drawTile(context, cell.getItem(), x, y);
