@@ -1,11 +1,15 @@
 package com.codecool.dungeoncrawl.logic;
 
+
+
 public class Movement {
 
     private final GameMap map;
+    private final Fight fight;
 
-    public Movement(GameMap map) {
+    public Movement(GameMap map, Fight fight) {
         this.map = map;
+        this.fight = fight;
     }
 
     private boolean cellIsOccupied(int x, int y) {
@@ -21,6 +25,9 @@ public class Movement {
 
     public boolean movementCheck(int x, int y) {
         fireCheck(x, y);
+        if(cellIsOccupied(x,y)){
+            fight.fightEnemy(x, y);
+        }
         if (cellIsNotWall(x, y) && !cellIsOccupied(x, y)) {
             return true;
         };

@@ -12,7 +12,8 @@ public class Player extends Actor {
     public Player(Cell cell) {
         super(cell);
         inventory = new ArrayList<>();
-        setDamage(3);
+        setDamage(5);
+        setHealth(15);
     }
 
     public List<Item> getInventory() {

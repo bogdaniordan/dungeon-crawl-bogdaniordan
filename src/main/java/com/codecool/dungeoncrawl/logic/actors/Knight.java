@@ -8,7 +8,7 @@ public class Knight extends Actor {
     public Knight(Cell cell) {
         super(cell);
         setDamage(3);
-        setHealth(13);
+        setHealth(12);
     }
 
     public enum directionType {

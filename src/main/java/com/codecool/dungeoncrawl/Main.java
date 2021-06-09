@@ -32,7 +32,8 @@ public class Main extends Application {
     Label nameLabel = new Label();
     Label damageLabel = new Label();
     Label inventoryItems = new Label();
-    Movement movement = new Movement(map);
+    Fight fight = new Fight(map);
+    Movement movement = new Movement(map, fight);
     ItemEffect itemEffect = new ItemEffect();
     private String name = "Crawl";
 
@@ -168,7 +169,8 @@ public class Main extends Application {
         if (map.getCell(map.getPlayer().getX(), map.getPlayer().getY()).getType() == CellType.STAIRS) {
             currentMap = "/second_map.txt";
             map = MapLoader.loadMap(currentMap);
-            movement = new Movement(map);
+            fight = new Fight(map);
+            movement = new Movement(map, fight);
             map.getPlayer().setDamage(oldDamage);
             map.getPlayer().setHealth(oldHealth);
             map.getPlayer().setInventory(oldItems);
