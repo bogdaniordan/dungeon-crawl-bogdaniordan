@@ -121,8 +121,6 @@ public class Main extends Application {
     }
 
     private void refresh() {
-//        int knightMoveCounter = 0;
-//        int monsterMoveCounter = 0;
         context.setFill(Color.BLACK);
         context.fillRect(0, 0, canvas.getWidth(), canvas.getHeight());
         for (int x = 0; x < map.getWidth(); x++) {
@@ -130,17 +128,6 @@ public class Main extends Application {
                 Cell cell = map.getCell(x, y);
                 if (cell.getActor() != null) {
                     Tiles.drawTile(context, cell.getActor(), x, y);
-//                    if (cell.getActor() instanceof Knight) {
-//                        if (knightMoveCounter == 0) {
-//                            ((Knight) cell.getActor()).moveKnight();
-//                            knightMoveCounter++;
-//                        }
-//                    } else if (cell.getActor() instanceof Monster) {
-//                        if (monsterMoveCounter == 0) {
-//                            ((Monster) cell.getActor()).attackPlayer(map);
-//                            monsterMoveCounter++;
-//                        }
-//                    }
                 } else if (cell.getItem() != null) {
                     Tiles.drawTile(context, cell.getItem(), x, y);
                 } else {
