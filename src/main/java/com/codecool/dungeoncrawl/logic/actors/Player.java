@@ -13,7 +13,7 @@ public class Player extends Actor {
         super(cell);
         inventory = new ArrayList<>();
         setDamage(5);
-        setHealth(15);
+        setHealth(20);
     }
 
     public List<Item> getInventory() {

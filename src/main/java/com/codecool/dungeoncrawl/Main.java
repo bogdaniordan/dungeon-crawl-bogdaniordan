@@ -87,10 +87,11 @@ public class Main extends Application {
     }
 
     private void onKeyPressed(KeyEvent keyEvent) {
+        moveEnemies();
         switch (keyEvent.getCode()) {
             case UP:
                 if (movement.movementCheck(0, - 1) || name.equals("Bogdan")) {
-                    map.getPlayer().move(0, -1);
+                    map.getPlayer().move(0, - 1);
                     teleportToSecondMap(map.getPlayer().getHealth(), map.getPlayer().getInventory(),map.getPlayer().getDamage());
                 }
                 refresh();
@@ -104,7 +105,7 @@ public class Main extends Application {
                 break;
             case LEFT:
                 if (movement.movementCheck(- 1, 0) || name.equals("Bogdan")) {
-                    map.getPlayer().move(-1, 0);
+                    map.getPlayer().move(- 1, 0);
                     teleportToSecondMap(map.getPlayer().getHealth(), map.getPlayer().getInventory(),map.getPlayer().getDamage());
                 }
                 refresh();
@@ -120,8 +121,8 @@ public class Main extends Application {
     }
 
     private void refresh() {
-        int knightMoveCounter = 0;
-        int c = 0;
+//        int knightMoveCounter = 0;
+//        int monsterMoveCounter = 0;
         context.setFill(Color.BLACK);
         context.fillRect(0, 0, canvas.getWidth(), canvas.getHeight());
         for (int x = 0; x < map.getWidth(); x++) {
@@ -129,29 +130,17 @@ public class Main extends Application {
                 Cell cell = map.getCell(x, y);
                 if (cell.getActor() != null) {
                     Tiles.drawTile(context, cell.getActor(), x, y);
-                    if (cell.getActor() instanceof Knight) {
-                        if (knightMoveCounter == 0) {
-                            ((Knight) cell.getActor()).moveKnight();
-                            knightMoveCounter++;
-                        }
-
-//                        int knightX = ((Knight) cell.getActor()).getKnightX();
-//                        int knightY = ((Knight) cell.getActor()).getKnightY();
-//                        ((Knight) cell.getActor()).move(knightX, knightY);
-//                        cell.setActor(null);
+//                    if (cell.getActor() instanceof Knight) {
 //                        if (knightMoveCounter == 0) {
-//                            map.getCell(((Knight) cell.getActor()).getKnightX(), ((Knight) cell.getActor()).getKnightY()).setActor(cell.getActor());
-//                            cell.setActor(null);
-//                            knightMoveCounter = 1;
+//                            ((Knight) cell.getActor()).moveKnight();
+//                            knightMoveCounter++;
 //                        }
-                    } else if (cell.getActor() instanceof Monster) {
-//                        System.out.println("EXD");
-                        if (c == 0) {
-                            ((Monster) cell.getActor()).attackPlayer(map);
-                            c++;
-                        }
-
-                    }
+//                    } else if (cell.getActor() instanceof Monster) {
+//                        if (monsterMoveCounter == 0) {
+//                            ((Monster) cell.getActor()).attackPlayer(map);
+//                            monsterMoveCounter++;
+//                        }
+//                    }
                 } else if (cell.getItem() != null) {
                     Tiles.drawTile(context, cell.getItem(), x, y);
                 } else {
@@ -175,6 +164,29 @@ public class Main extends Application {
             map.getPlayer().setHealth(oldHealth);
             map.getPlayer().setInventory(oldItems);
             run(new Stage(), name);
+        }
+    }
+
+    private void moveEnemies() {
+        boolean moveKnight = true;
+        boolean moveMonster = true;
+        for (int x = 0; x < map.getWidth(); x++) {
+            for (int y = 0; y < map.getHeight(); y++) {
+                Cell cell = map.getCell(x, y);
+                if (cell.getActor() != null) {
+                    if (cell.getActor() instanceof Knight) {
+                        if (moveKnight) {
+                            ((Knight) cell.getActor()).moveKnight();
+                            moveKnight = false;
+                        }
+                    } else if (cell.getActor() instanceof Monster) {
+                        if (moveMonster) {
+                            ((Monster) cell.getActor()).attackPlayer(map);
+                            moveMonster = false;
+                        }
+                    }
+                }
+            }
         }
     }
 }
