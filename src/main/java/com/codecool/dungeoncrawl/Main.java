@@ -34,7 +34,6 @@ public class Main extends Application {
     Label inventoryItems = new Label();
     Fight fight = new Fight(map);
     Movement movement = new Movement(map, fight);
-    ItemEffect itemEffect = new ItemEffect();
     private String name = "Crawl";
 
 
@@ -70,7 +69,7 @@ public class Main extends Application {
         BorderPane borderPane = new BorderPane();
 
         Button pickUpButton = new Button("Pick item");
-        pickUpButton.setOnAction(new PickupHandler(map, borderPane, itemEffect));
+        pickUpButton.setOnAction(new PickupHandler(map, borderPane));
         ui.add(pickUpButton, 0 , 20);
 
         borderPane.setCenter(canvas);
