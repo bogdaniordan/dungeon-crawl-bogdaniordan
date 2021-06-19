@@ -3,9 +3,9 @@ package com.codecool.dungeoncrawl.logic;
 import com.codecool.dungeoncrawl.logic.actors.Player;
 
 public class GameMap {
-    private int width;
-    private int height;
-    private Cell[][] cells;
+    private final int width;
+    private final int height;
+    private final Cell[][] cells;
 
     private Player player;
 
@@ -22,6 +22,10 @@ public class GameMap {
 
     public Cell getCell(int x, int y) {
         return cells[x][y];
+    }
+
+    public Cell[][] getCells() {
+        return cells;
     }
 
     public void setPlayer(Player player) {
