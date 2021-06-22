@@ -1,14 +1,19 @@
 package com.codecool.dungeoncrawl;
 
+import com.codecool.dungeoncrawl.button.LoadButton;
 import com.codecool.dungeoncrawl.button.PickupHandler;
 import com.codecool.dungeoncrawl.dao.GameDatabaseManager;
 import com.codecool.dungeoncrawl.logic.*;
 import com.codecool.dungeoncrawl.logic.actors.Knight;
 import com.codecool.dungeoncrawl.logic.actors.Monster;
 import com.codecool.dungeoncrawl.logic.actors.Player;
+import com.codecool.dungeoncrawl.logic.items.Cross;
 import com.codecool.dungeoncrawl.logic.items.Item;
 import com.codecool.dungeoncrawl.logic.popups.NamePopup;
 import com.codecool.dungeoncrawl.logic.popups.SavePopup;
+import com.codecool.dungeoncrawl.model.GameState;
+import com.codecool.dungeoncrawl.model.InventoryState;
+import com.codecool.dungeoncrawl.model.PlayerModel;
 import javafx.application.Application;
 import javafx.geometry.Insets;
 import javafx.scene.Scene;
@@ -26,6 +31,7 @@ import javafx.scene.paint.Color;
 import javafx.stage.Stage;
 
 import java.sql.SQLException;
+import java.util.ArrayList;
 import java.util.List;
 
 public class Main extends Application {
@@ -84,6 +90,10 @@ public class Main extends Application {
         Button pickUpButton = new Button("Pick item");
         pickUpButton.setOnAction(new PickupHandler(map, borderPane));
         ui.add(pickUpButton, 0 , 20);
+
+        Button loadButton = new Button("Load game");
+        loadButton.setOnAction(new LoadButton(dbManager));
+        ui.add(loadButton, 0 , 60);
 
         borderPane.setCenter(canvas);
         borderPane.setRight(ui);
@@ -161,7 +171,6 @@ public class Main extends Application {
                 break;
             case S:
                 Player player = map.getPlayer();
-//                dbManager.savePlayer(player);
                 SavePopup.display(name, dbManager, player, currentMap);
                 break;
         }
@@ -199,6 +208,24 @@ public class Main extends Application {
             map.getPlayer().setInventory(oldItems);
             run(new Stage(), name);
         }
+    }
+
+    public void loadSavedGame(PlayerModel playerModel, GameState gameState, InventoryState inventoryState) {
+        currentMap = gameState.getCurrentMap();
+        map = MapLoader.loadMap(currentMap);
+        name = playerModel.getPlayerName();
+        map.getPlayer().move(playerModel.getX(), playerModel.getY());
+        map.getPlayer().setHealth(playerModel.getHp());
+//        refresh();
+//        List<Item> newInventory = new ArrayList<>();
+//        for (int i = 0; i < inventoryState.getCrossesNumber()) {
+//            newInventory.add(new Cross());
+//        }
+//        for(int i = 0; i< )
+
+        map.getPlayer().setInventory(inventoryState.);
+        fight = new Fight(map);
+        movement = new Movement(map, fight);
     }
 
     private void moveEnemies() {
