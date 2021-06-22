@@ -6,6 +6,10 @@ import com.codecool.dungeoncrawl.logic.GameMap;
 public class Cross extends Item{
     private final int givenHp = 5;
 
+    public Cross() {
+
+    }
+
     public int getGivenHp() {
         return givenHp;
     }

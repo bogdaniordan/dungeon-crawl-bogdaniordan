@@ -21,12 +21,12 @@ public abstract class Actor implements Drawable {
         cell = nextCell;
     }
 
-//    public void newPosition(GameMap map, int x, int y) {
-//        Cell cell = map.getCell(x, y);
-//        this.cell.setActor(null);
-//        cell.setActor(this);
-//        this.cell = cell;
-//    }
+    public void newPosition(GameMap map, int x, int y) {
+        Cell cell = map.getCell(x, y);
+        this.cell.setActor(null);
+        cell.setActor(this);
+        this.cell = cell;
+    }
 
     public void setCell(Cell cell) {
         this.cell = cell;

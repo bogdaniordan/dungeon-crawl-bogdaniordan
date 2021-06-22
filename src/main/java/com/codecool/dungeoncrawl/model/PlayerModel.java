@@ -7,6 +7,7 @@ public class PlayerModel extends BaseModel {
     private int hp;
     private int x;
     private int y;
+    private int damage;
 
     public PlayerModel(String playerName, int x, int y) {
         this.playerName = playerName;
@@ -18,9 +19,8 @@ public class PlayerModel extends BaseModel {
         this.playerName = player.getName();
         this.x = player.getX();
         this.y = player.getY();
-
+        this.damage = player.getDamage();
         this.hp = player.getHealth();
-
     }
 
     public String getPlayerName() {
@@ -53,5 +53,25 @@ public class PlayerModel extends BaseModel {
 
     public void setY(int y) {
         this.y = y;
+    }
+
+    public int getDamage() {
+        return damage;
+    }
+
+    public void setDamage(int damage) {
+        this.damage = damage;
+    }
+
+    @Override
+    public String toString() {
+        return "PlayerModel{" +
+                "id=" + id +
+                ", playerName='" + playerName + '\'' +
+                ", hp=" + hp +
+                ", x=" + x +
+                ", y=" + y +
+                ", damage=" + damage +
+                '}';
     }
 }

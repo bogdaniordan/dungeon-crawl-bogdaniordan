@@ -17,12 +17,13 @@ public class PlayerDaoJdbc implements PlayerDao {
     @Override
     public void add(PlayerModel player) {
         try (Connection conn = dataSource.getConnection()) {
-            String sql = "INSERT INTO player (player_name, hp, x, y) VALUES (?, ?, ?, ?)";
+            String sql = "INSERT INTO player (player_name, hp, x, y, damage) VALUES (?, ?, ?, ?, ?)";
             PreparedStatement statement = conn.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS);
             statement.setString(1, player.getPlayerName());
             statement.setInt(2, player.getHp());
             statement.setInt(3, player.getX());
             statement.setInt(4, player.getY());
+            statement.setInt(5, player.getDamage());
             statement.executeUpdate();
             ResultSet resultSet = statement.getGeneratedKeys();
             resultSet.next();
@@ -36,14 +37,15 @@ public class PlayerDaoJdbc implements PlayerDao {
     public void update(PlayerModel player) {
         System.out.println("BOD");
         try (Connection conn = dataSource.getConnection()) {
-            String sql = "UPDATE player SET hp = ?, x = ? , y = ? WHERE id = ?";
+            String sql = "UPDATE player SET hp = ?, x = ? , y = ?, damage = ? WHERE id = ?";
             PreparedStatement st = conn.prepareStatement(sql);
             st.setInt(1, player.getHp());
             System.out.println(player.getHp());
             System.out.println(player.getPlayerName());
             st.setInt(2, player.getX());
             st.setInt(3, player.getY());
-            st.setInt(4, player.getId());
+            st.setInt(4, player.getDamage());
+            st.setInt(5, player.getId());
             st.executeUpdate();
         } catch (SQLException e) {
             throw new RuntimeException(e);
@@ -58,11 +60,13 @@ public class PlayerDaoJdbc implements PlayerDao {
     @Override
     public List<PlayerModel> getAll() {
         try (Connection conn = dataSource.getConnection()) {
-            String sql = "SELECT id, player_name, hp, x, y FROM player";
+            String sql = "SELECT id, player_name, hp, x, y, damage FROM player";
             ResultSet rs = conn.createStatement().executeQuery(sql);
             List<PlayerModel> result = new ArrayList<>();
             while (rs.next()) {
                 PlayerModel playerModel = new PlayerModel(rs.getString(2), rs.getInt(4), rs.getInt(5));
+                playerModel.setHp(rs.getInt(3));
+                playerModel.setDamage(rs.getInt(6));
                 playerModel.setId(rs.getInt(1));
                 result.add(playerModel);
             }

@@ -9,6 +9,8 @@ import com.codecool.dungeoncrawl.logic.actors.Monster;
 import com.codecool.dungeoncrawl.logic.actors.Player;
 import com.codecool.dungeoncrawl.logic.items.Cross;
 import com.codecool.dungeoncrawl.logic.items.Item;
+import com.codecool.dungeoncrawl.logic.items.Key;
+import com.codecool.dungeoncrawl.logic.items.Sword;
 import com.codecool.dungeoncrawl.logic.popups.NamePopup;
 import com.codecool.dungeoncrawl.logic.popups.SavePopup;
 import com.codecool.dungeoncrawl.model.GameState;
@@ -214,16 +216,13 @@ public class Main extends Application {
         currentMap = gameState.getCurrentMap();
         map = MapLoader.loadMap(currentMap);
         name = playerModel.getPlayerName();
-        map.getPlayer().move(playerModel.getX(), playerModel.getY());
+        map.getPlayer().newPosition(map, playerModel.getX(), playerModel.getY());
         map.getPlayer().setHealth(playerModel.getHp());
-//        refresh();
-//        List<Item> newInventory = new ArrayList<>();
-//        for (int i = 0; i < inventoryState.getCrossesNumber()) {
-//            newInventory.add(new Cross());
-//        }
-//        for(int i = 0; i< )
+        System.out.println(playerModel.getHp());
 
-        map.getPlayer().setInventory(inventoryState.);
+        List<Item> newInventory = Utils.loadItemsFromDB(inventoryState.getCrossesNumber(), inventoryState.getKeysNumber(), inventoryState.getSwordsNumber());
+
+        map.getPlayer().setInventory(newInventory);
         fight = new Fight(map);
         movement = new Movement(map, fight);
     }

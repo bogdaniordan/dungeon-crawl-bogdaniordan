@@ -14,6 +14,8 @@ public class Sword extends Item {
         super(cell);
     }
 
+    public Sword() {}
+
     @Override
     public void applyEffect(GameMap map, Cell cell) {
         map.getPlayer().increaseDamage(((Sword) cell.getItem()).getDamage());

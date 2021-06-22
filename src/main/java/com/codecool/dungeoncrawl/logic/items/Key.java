@@ -9,6 +9,8 @@ public class Key extends Item {
         super(cell);
     }
 
+    public Key() {}
+
     @Override
     public void applyEffect(GameMap map, Cell cell) {
         if (cell.getItem() instanceof Key) {

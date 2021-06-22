@@ -31,12 +31,12 @@ public class SelectSave {
 
         choiceBox.setOnAction((event) -> {
             PlayerModel savedPlayerModel = choiceBox.getSelectionModel().getSelectedItem();
+            System.out.println(savedPlayerModel.toString());
             GameState savedGameState = databaseManager.findByPlayerModel(savedPlayerModel);
             InventoryState savedInventoryState = databaseManager.findInventoryState(savedPlayerModel);
-            System.out.println(savedInventoryState.toString());
-//            Main main = new Main();
-//            main.loadSavedGame(savedPlayerModel, savedGameState);
-//            main.run(new Stage(), savedPlayerModel.getPlayerName());
+            Main main = new Main();
+            main.loadSavedGame(savedPlayerModel, savedGameState, savedInventoryState);
+            main.run(new Stage(), savedPlayerModel.getPlayerName());
             popupWindow.close();
         });
 
