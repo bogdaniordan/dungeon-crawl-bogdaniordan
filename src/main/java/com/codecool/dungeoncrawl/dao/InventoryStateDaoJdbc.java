@@ -1,5 +1,6 @@
 package com.codecool.dungeoncrawl.dao;
 
+import com.codecool.dungeoncrawl.model.GameState;
 import com.codecool.dungeoncrawl.model.InventoryState;
 import com.codecool.dungeoncrawl.model.PlayerModel;
 
@@ -34,7 +35,17 @@ public class InventoryStateDaoJdbc implements InventoryStateDao{
 
     @Override
     public void update(InventoryState state) {
-
+        try (Connection conn = dataSource.getConnection()) {
+            String sql = "UPDATE inventory_state SET crosses_number = ?, swords_number = ?, keys_number = ? WHERE id = ?";
+            PreparedStatement st = conn.prepareStatement(sql);
+            st.setInt(1, state.getCrossesNumber());
+            st.setInt(2, state.getSwordsNumber());
+            st.setInt(3, state.getKeysNumber());
+            st.setInt(4, state.getId());
+            st.executeUpdate();
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
     }
 
     @Override
@@ -49,6 +60,27 @@ public class InventoryStateDaoJdbc implements InventoryStateDao{
 
     @Override
     public InventoryState getByPlayerModel(PlayerModel playerModel) {
-        return null;
+        try (Connection conn = dataSource.getConnection()) {
+
+            String sql = "SELECT id, crosses_number, swords_number, keys_number FROM inventory_state WHERE player_id = ?";
+            PreparedStatement st = conn.prepareStatement(sql);
+            st.setInt(1, playerModel.getId());
+            ResultSet rs = st.executeQuery();
+            if (!rs.next()) {
+                return null;
+            }
+
+            int inventoryStateId = rs.getInt(1);
+            int crossesNumber = rs.getInt(2);
+            int swordsNumber = rs.getInt(3);
+            int keysNumber = rs.getInt(4);
+
+            InventoryState inventoryState = new InventoryState(crossesNumber, swordsNumber, keysNumber, playerModel);
+
+            inventoryState.setId(inventoryStateId);
+            return inventoryState;
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
     }
 }

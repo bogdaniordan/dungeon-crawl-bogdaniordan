@@ -33,7 +33,16 @@ public class GameStateDaoJdbc implements GameStateDao {
 
     @Override
     public void update(GameState state) {
-
+        try (Connection conn = dataSource.getConnection()) {
+            String sql = "UPDATE game_state SET current_map = ?, saved_at = ? WHERE id = ?";
+            PreparedStatement st = conn.prepareStatement(sql);
+            st.setString(1, state.getCurrentMap());
+            st.setDate(2, state.getSavedAt());
+            st.setInt(3, state.getId());
+            st.executeUpdate();
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
     }
 
     @Override
@@ -48,7 +57,27 @@ public class GameStateDaoJdbc implements GameStateDao {
 
     @Override
     public GameState getByPlayerModel(PlayerModel playerModel) {
-        return null;
+        try (Connection conn = dataSource.getConnection()) {
+
+            String sql = "SELECT id, current_map, saved_at FROM game_state WHERE player_id = ?";
+            PreparedStatement st = conn.prepareStatement(sql);
+            st.setInt(1, playerModel.getId());
+            ResultSet rs = st.executeQuery();
+            if (!rs.next()) {
+                return null;
+            }
+
+            int gameStateId = rs.getInt(1);
+            String currentMap = rs.getString(2);
+            Date date = rs.getDate(3);
+
+            GameState gameState = new GameState(currentMap, date, playerModel);
+
+            gameState.setId(gameStateId);
+            return gameState;
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
     }
 
 }

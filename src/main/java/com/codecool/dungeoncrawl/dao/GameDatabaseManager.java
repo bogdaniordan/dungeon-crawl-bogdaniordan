@@ -33,12 +33,20 @@ public class GameDatabaseManager {
         return gameStateDao.getByPlayerModel(playerModel);
     }
 
+    public InventoryState findInventoryState(PlayerModel playerModel) {
+        return inventoryStateDao.getByPlayerModel(playerModel);
+    }
+
     public void updateGameState(GameState gameState) {
         gameStateDao.update(gameState);
     }
 
     public void updatePlayer(PlayerModel player)  {
         playerDao.update(player);
+    }
+
+    public void updateInventory(InventoryState inventoryState) {
+        inventoryStateDao.update(inventoryState);
     }
 
     public List<PlayerModel> getPersistedPlayers() {
