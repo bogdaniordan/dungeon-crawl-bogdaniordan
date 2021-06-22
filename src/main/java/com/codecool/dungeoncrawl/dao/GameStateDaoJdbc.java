@@ -9,6 +9,11 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class GameStateDaoJdbc implements GameStateDao {
+    private DataSource dataSource;
+
+    public GameStateDaoJdbc(DataSource dataSource) {this.dataSource = dataSource;}
+
+
     @Override
     public void add(GameState state) {
 
@@ -28,4 +33,10 @@ public class GameStateDaoJdbc implements GameStateDao {
     public List<GameState> getAll() {
         return null;
     }
+
+    @Override
+    public GameState getByPlayerModel(PlayerModel playerModel) {
+        return null;
+    }
+
 }
