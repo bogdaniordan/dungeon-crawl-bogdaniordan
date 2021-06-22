@@ -28,7 +28,9 @@ import java.util.List;
 
 public class Main extends Application {
 
+    private String name = "Sergei Mizil";
     private String currentMap = "/map.txt";
+
     GameMap map = MapLoader.loadMap(currentMap);
     Canvas canvas = new Canvas(
             map.getWidth() * Tiles.TILE_WIDTH,
@@ -41,7 +43,6 @@ public class Main extends Application {
     Fight fight = new Fight(map);
     Movement movement = new Movement(map, fight);
     GameDatabaseManager dbManager;
-    private String name = "Crawl";
 
 
     public static void main(String[] args) {
@@ -54,6 +55,7 @@ public class Main extends Application {
     }
 
     public void run(Stage primaryStage, String name) {
+        setupDbManager();
         this.name = name;
 
         GridPane ui = new GridPane();
@@ -86,7 +88,7 @@ public class Main extends Application {
         primaryStage.setScene(scene);
         refresh();
         scene.setOnKeyPressed(this::onKeyPressed);
-        scene.setOnKeyReleased(this::onKeyReleased);
+        scene.setOnKeyReleased(this::onKeyReleased); //new
 
         primaryStage.setTitle("Dungeon Crawl");
         primaryStage.show();
@@ -155,7 +157,7 @@ public class Main extends Application {
                 break;
             case S:
                 Player player = map.getPlayer();
-                dbManager.savePlayer(player);
+//                dbManager.savePlayer(player);
                 break;
         }
     }
