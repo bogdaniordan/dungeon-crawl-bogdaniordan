@@ -45,4 +45,15 @@ public class InventoryState extends BaseModel {
     public void setPlayer(PlayerModel player) {
         this.player = player;
     }
+
+    @Override
+    public String toString() {
+        return "InventoryState{" +
+                "id=" + id +
+                ", crossesNumber=" + crossesNumber +
+                ", swordsNumber=" + swordsNumber +
+                ", keysNumber=" + keysNumber +
+                ", player=" + player +
+                '}';
+    }
 }

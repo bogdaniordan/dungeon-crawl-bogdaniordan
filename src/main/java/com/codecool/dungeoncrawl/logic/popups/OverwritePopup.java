@@ -36,12 +36,18 @@ public class OverwritePopup {
                     popupWindow.close();
                     Platform.runLater(() -> {
                         System.out.println("updating");
-                        dbManager.updatePlayer(playerModel);//update player
 
-                        GameState gameState = dbManager.findByPlayerModel(playerModel);
-                        InventoryState inventoryState = dbManager.findInventoryState(playerModel);
+                        PlayerModel newPlayerModel = new PlayerModel(player);
+                        newPlayerModel.setId(playerModel.getId());
 
-                        dbManager.updateGameState(gameState);//update gamestate
+                        dbManager.updatePlayer(newPlayerModel);//update player
+
+                        GameState gameState = new GameState(currentMap, new Date(System.currentTimeMillis()), newPlayerModel);
+
+                        InventoryState inventoryState = new InventoryState(player.getCrossesNumber(), player.getSwordsNumber(), player.getKeysNumber(), newPlayerModel);
+                        inventoryState.setId(playerModel.getId());
+
+                        dbManager.updateGameState(gameState);//update game state
                         dbManager.updateInventory(inventoryState); //update inventory state
                     });
                 }
@@ -52,19 +58,19 @@ public class OverwritePopup {
             //save new player
             // save new game state with new player saved id(maybe retrieve the player)
             newSavePopup(dbManager, currentMap, player);
+            popupWindow.close();
         });
 
 
         VBox layout= new VBox(10);
 
-
         layout.getChildren().addAll(label1, yesButton, noButton);
 
         layout.setAlignment(Pos.CENTER);
 
-        Scene scene1= new Scene(layout, 300, 250);
+        Scene scene = new Scene(layout, 300, 250);
 
-        popupWindow.setScene(scene1);
+        popupWindow.setScene(scene);
 
         popupWindow.showAndWait();
 
@@ -77,14 +83,13 @@ public class OverwritePopup {
 
         TextField nameInput = new TextField();
 
-        Label label1 = new Label("Enter a new save name: ");
+        Label label = new Label("Enter a new save name: ");
 
 
         Button button1= new Button("Save");
 
 
         button1.setOnAction(e -> {
-                    popupWindow.close();
                     Platform.runLater(() -> {
                         player.setName(nameInput.getText());
                         PlayerModel playerModel = dbManager.savePlayer(player);
@@ -96,16 +101,16 @@ public class OverwritePopup {
         );
 
 
-        VBox layout= new VBox(10);
+        VBox layout = new VBox(10);
 
 
-        layout.getChildren().addAll(label1, nameInput, button1);
+        layout.getChildren().addAll(label, nameInput, button1);
 
         layout.setAlignment(Pos.CENTER);
 
-        Scene scene1= new Scene(layout, 300, 250);
+        Scene scene= new Scene(layout, 300, 250);
 
-        popupWindow.setScene(scene1);
+        popupWindow.setScene(scene);
 
         popupWindow.showAndWait();
     }
