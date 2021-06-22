@@ -2,6 +2,7 @@ package com.codecool.dungeoncrawl.dao;
 
 import com.codecool.dungeoncrawl.logic.actors.Player;
 import com.codecool.dungeoncrawl.model.GameState;
+import com.codecool.dungeoncrawl.model.InventoryState;
 import com.codecool.dungeoncrawl.model.PlayerModel;
 import org.postgresql.ds.PGSimpleDataSource;
 
@@ -46,6 +47,10 @@ public class GameDatabaseManager {
 
     public void saveGameState(GameState gameState) {
         gameStateDao.add(gameState);
+    }
+
+    public void saveInventoryState(InventoryState inventoryState) {
+        inventoryStateDao.add(inventoryState);
     }
 
     private DataSource connect() throws SQLException {

@@ -2,7 +2,9 @@ package com.codecool.dungeoncrawl.logic.popups;
 
 import com.codecool.dungeoncrawl.dao.GameDatabaseManager;
 import com.codecool.dungeoncrawl.logic.actors.Player;
+import com.codecool.dungeoncrawl.logic.items.Item;
 import com.codecool.dungeoncrawl.model.GameState;
+import com.codecool.dungeoncrawl.model.InventoryState;
 import com.codecool.dungeoncrawl.model.PlayerModel;
 import javafx.application.Platform;
 import javafx.geometry.Pos;
@@ -38,17 +40,18 @@ public class SavePopup {
                     popupWindow.close();
                     Platform.runLater(() -> {
                         List<PlayerModel> savedPlayers = dbManager.getPersistedPlayers();
-                        for (PlayerModel playerModel: savedPlayers) {
-                            if (playerModel.getPlayerName().equals(playerName)) {
-                                //if there is a saved player with the same name, show overwrite popup
-////                                OverwritePopup overwritePopup = new OverwritePopup();
-////                                overwritePopup.display(dbManager, playerModel, currentMap, player);
-////                                return;
-                            }
-                        }
+//                        for (PlayerModel playerModel: savedPlayers) {
+//                            if (playerModel.getPlayerName().equals(playerName)) {
+//                                //if there is a saved player with the same name, show overwrite popup
+//////                                OverwritePopup overwritePopup = new OverwritePopup();
+//////                                overwritePopup.display(dbManager, playerModel, currentMap, player);
+//////                                return;
+//                            }
+//                        }
                         // if the player name doesn't exist in the db, the player and game state get saved
                         PlayerModel playerModel = dbManager.savePlayer(player);
                         dbManager.saveGameState(new GameState(currentMap, new Date(System.currentTimeMillis()), playerModel)); //save game state linked to the player id
+                        dbManager.saveInventoryState(new InventoryState(player.getCrossesNumber(), player.getSwordsNumber(), player.getKeysNumber(), playerModel));
                         popupWindow.close();
                     });
                 }

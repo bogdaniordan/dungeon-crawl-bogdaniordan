@@ -60,6 +60,8 @@ public class Main extends Application {
         setupDbManager();
         this.name = name;
 
+        map.getPlayer().setName(name);
+
         GridPane ui = new GridPane();
         ui.setPrefWidth(300);
         ui.setPadding(new Insets(10));
