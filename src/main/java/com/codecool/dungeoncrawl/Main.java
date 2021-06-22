@@ -1,5 +1,6 @@
 package com.codecool.dungeoncrawl;
 
+import com.codecool.dungeoncrawl.button.PickupHandler;
 import com.codecool.dungeoncrawl.dao.GameDatabaseManager;
 import com.codecool.dungeoncrawl.logic.*;
 import com.codecool.dungeoncrawl.logic.actors.Knight;
@@ -7,6 +8,7 @@ import com.codecool.dungeoncrawl.logic.actors.Monster;
 import com.codecool.dungeoncrawl.logic.actors.Player;
 import com.codecool.dungeoncrawl.logic.items.Item;
 import com.codecool.dungeoncrawl.logic.popups.NamePopup;
+import com.codecool.dungeoncrawl.logic.popups.SavePopup;
 import javafx.application.Application;
 import javafx.geometry.Insets;
 import javafx.scene.Scene;
@@ -158,6 +160,7 @@ public class Main extends Application {
             case S:
                 Player player = map.getPlayer();
 //                dbManager.savePlayer(player);
+                SavePopup.display(name, dbManager, player, currentMap);
                 break;
         }
     }

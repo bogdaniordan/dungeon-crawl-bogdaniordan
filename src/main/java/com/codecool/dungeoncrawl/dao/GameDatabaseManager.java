@@ -12,17 +12,20 @@ import java.util.List;
 public class GameDatabaseManager {
     private PlayerDao playerDao;
     private GameStateDao gameStateDao;
+    private InventoryStateDao inventoryStateDao;
 
 
     public void setup() throws SQLException {
         DataSource dataSource = connect();
         playerDao = new PlayerDaoJdbc(dataSource);
         gameStateDao = new GameStateDaoJdbc(dataSource);
+        inventoryStateDao = new InventoryStateDaoJdbc(dataSource);
     }
 
-    public void savePlayer(Player player) {
-        PlayerModel model = new PlayerModel(player);
-        playerDao.add(model);
+    public PlayerModel savePlayer(Player player) {
+        PlayerModel playerModel = new PlayerModel(player);
+        playerDao.add(playerModel);
+        return playerModel;
     }
 
     public GameState findByPlayerModel(PlayerModel playerModel) {

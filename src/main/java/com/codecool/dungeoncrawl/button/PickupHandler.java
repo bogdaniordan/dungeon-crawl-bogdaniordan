@@ -1,5 +1,7 @@
-package com.codecool.dungeoncrawl.logic;
+package com.codecool.dungeoncrawl.button;
 
+import com.codecool.dungeoncrawl.logic.Cell;
+import com.codecool.dungeoncrawl.logic.GameMap;
 import com.codecool.dungeoncrawl.logic.items.Item;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
