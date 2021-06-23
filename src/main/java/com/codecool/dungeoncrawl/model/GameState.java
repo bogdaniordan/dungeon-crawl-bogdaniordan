@@ -7,13 +7,22 @@ import java.util.List;
 public class GameState extends BaseModel {
     private Date savedAt;
     private String currentMap;
-    private List<String> discoveredMaps = new ArrayList<>();
+    private final List<String> discoveredMaps = new ArrayList<>();
     private PlayerModel player;
+    private InventoryState inventoryState;
 
     public GameState(String currentMap, Date savedAt, PlayerModel player) {
         this.currentMap = currentMap;
         this.savedAt = savedAt;
         this.player = player;
+    }
+
+    public InventoryState getInventoryState() {
+        return inventoryState;
+    }
+
+    public void setInventoryState(InventoryState inventoryState) {
+        this.inventoryState = inventoryState;
     }
 
     public Date getSavedAt() {
