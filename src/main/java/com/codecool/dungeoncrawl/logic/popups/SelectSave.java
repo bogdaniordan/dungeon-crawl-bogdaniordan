@@ -9,6 +9,7 @@ import javafx.geometry.Pos;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.ChoiceBox;
+import javafx.scene.control.Label;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
 import javafx.stage.Modality;
@@ -22,6 +23,8 @@ public class SelectSave {
 
         popupWindow.initModality(Modality.APPLICATION_MODAL);
 
+        Label label = new Label("Select a saved game");
+
         ChoiceBox<PlayerModel> choiceBox = new ChoiceBox<>();
 
         List<PlayerModel> playerSaves = databaseManager.getPersistedPlayers();
@@ -31,7 +34,6 @@ public class SelectSave {
 
         choiceBox.setOnAction((event) -> {
             PlayerModel savedPlayerModel = choiceBox.getSelectionModel().getSelectedItem();
-            System.out.println(savedPlayerModel.toString());
             GameState savedGameState = databaseManager.findByPlayerModel(savedPlayerModel);
             InventoryState savedInventoryState = databaseManager.findInventoryState(savedPlayerModel);
             Main main = new Main();
@@ -46,11 +48,11 @@ public class SelectSave {
 
         VBox layout= new VBox(10);
 
-        layout.getChildren().addAll(button);
+        layout.getChildren().addAll(label, button);
 
         layout.setAlignment(Pos.CENTER);
 
-        Scene scene = new Scene(hbox, 300, 250);
+        Scene scene = new Scene(hbox, 300, 300);
 
         popupWindow.setScene(scene);
 

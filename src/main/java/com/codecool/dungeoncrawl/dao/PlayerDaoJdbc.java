@@ -64,6 +64,7 @@ public class PlayerDaoJdbc implements PlayerDao {
             ResultSet rs = conn.createStatement().executeQuery(sql);
             List<PlayerModel> result = new ArrayList<>();
             while (rs.next()) {
+                //creates the player model object, sets its attributes and adds it to the result list
                 PlayerModel playerModel = new PlayerModel(rs.getString(2), rs.getInt(4), rs.getInt(5));
                 playerModel.setHp(rs.getInt(3));
                 playerModel.setDamage(rs.getInt(6));

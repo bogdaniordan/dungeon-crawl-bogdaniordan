@@ -213,16 +213,17 @@ public class Main extends Application {
     }
 
     public void loadSavedGame(PlayerModel playerModel, GameState gameState, InventoryState inventoryState) {
+        //loads map, name and player stats
         currentMap = gameState.getCurrentMap();
         map = MapLoader.loadMap(currentMap);
         name = playerModel.getPlayerName();
         map.getPlayer().newPosition(map, playerModel.getX(), playerModel.getY());
         map.getPlayer().setHealth(playerModel.getHp());
-        System.out.println(playerModel.getHp());
 
+        //loads new inventory
         List<Item> newInventory = Utils.loadItemsFromDB(inventoryState.getCrossesNumber(), inventoryState.getKeysNumber(), inventoryState.getSwordsNumber());
-
         map.getPlayer().setInventory(newInventory);
+
         fight = new Fight(map);
         movement = new Movement(map, fight);
     }

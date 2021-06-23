@@ -26,7 +26,7 @@ public class SavePopup {
         popupWindow.initModality(Modality.APPLICATION_MODAL);
 
 
-        Label label1 = new Label("Save game");
+        Label label = new Label("Save game");
 
 
         Button saveButton = new Button("Save");
@@ -60,7 +60,7 @@ public class SavePopup {
 
         VBox layout= new VBox(10);
 
-        layout.getChildren().addAll(label1, saveButton, cancelButton );
+        layout.getChildren().addAll(label, saveButton, cancelButton );
 
         layout.setAlignment(Pos.CENTER);
 
