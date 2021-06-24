@@ -42,6 +42,9 @@ public class OverwritePopup {
 
                         dbManager.updatePlayer(newPlayerModel);//update player
 
+                        //write file map with player's name
+                        // pass the new filemap as the currentMap
+
                         GameState gameState = new GameState(currentMap, new Date(System.currentTimeMillis()), newPlayerModel);
 
                         InventoryState inventoryState = new InventoryState(player.getCrossesNumber(), player.getSwordsNumber(), player.getKeysNumber(), newPlayerModel);
@@ -93,6 +96,10 @@ public class OverwritePopup {
                     Platform.runLater(() -> {
                         player.setName(nameInput.getText());
                         PlayerModel playerModel = dbManager.savePlayer(player);
+
+                        //write file map with player's name
+                        // pass the new filemap as the currentMap
+
                         dbManager.saveGameState(new GameState(currentMap, new Date(System.currentTimeMillis()), playerModel)); //save game state linked to the player id
                         dbManager.saveInventoryState(new InventoryState(player.getCrossesNumber(), player.getSwordsNumber(), player.getKeysNumber(), playerModel));
                         popupWindow.close();

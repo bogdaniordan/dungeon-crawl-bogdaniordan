@@ -163,9 +163,9 @@ public class Main extends Application {
                 fight = new Fight(map);
                 movement = new Movement(map, fight);
                 Main main = new Main();
-                main.run(new Stage(), "ficu");
+                main.run(new Stage(), "ficus");
             case UP:
-                Utils.writeMapToFile(map);
+                Utils.writeMapToFile(map, "ll");
                 if (movement.movementCheck(0, - 1) || name.equals("Bogdan")) {
                     map.getPlayer().move(0, - 1);
                     teleportToSecondMap(map.getPlayer().getHealth(), map.getPlayer().getInventory(),map.getPlayer().getDamage());

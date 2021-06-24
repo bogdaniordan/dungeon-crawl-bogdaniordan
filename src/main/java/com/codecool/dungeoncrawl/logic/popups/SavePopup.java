@@ -49,6 +49,10 @@ public class SavePopup {
                             }
                         }
                         // if the player name doesn't exist in the db, the player and game state get saved
+
+                        //write file map with player's name
+                        // pass the new filemap as the currentMap
+
                         PlayerModel playerModel = dbManager.savePlayer(player);
                         dbManager.saveGameState(new GameState(currentMap, new Date(System.currentTimeMillis()), playerModel)); //save game state linked to the player id
                         dbManager.saveInventoryState(new InventoryState(player.getCrossesNumber(), player.getSwordsNumber(), player.getKeysNumber(), playerModel));

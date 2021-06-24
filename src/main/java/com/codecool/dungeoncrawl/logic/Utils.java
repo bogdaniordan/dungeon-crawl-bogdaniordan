@@ -37,12 +37,11 @@ public class Utils {
         return newInventory;
     }
 
-    public static void writeMapToFile(GameMap map) {
+    public static void writeMapToFile(GameMap map, String filename) {
         try {
-            System.out.println(map.getWidth());
-            System.out.println(map.getHeight());
-            System.out.println("writing...");
-            FileWriter myObj = new FileWriter("filename.txt");
+            System.out.println("Writing map to file...");
+            FileWriter myObj = new FileWriter("src/main/resources/" + filename + ".txt");
+//            FileWriter myObj = new FileWriter("src/main/resources/filename.txt");
             BufferedWriter bufferedWriter = new BufferedWriter(myObj);
                 StringBuilder s = new StringBuilder();
                 s.append(map.getWidth());
@@ -52,46 +51,44 @@ public class Utils {
                 bufferedWriter.write(String.valueOf(s));
                 bufferedWriter.newLine();
                 s.setLength(0);
-
-                for (int i = 0; i < map.getWidth(); i++) {
-                    for (int j = 0; j < map.getHeight(); j++) {
-                        if (map.getCell(i,j).getType() == CellType.EMPTY) {
+                for (int i = 0; i < map.getHeight(); i++) {
+                    for (int j = 0; j < map.getWidth(); j++) {
+                        if (map.getCell(j, i).getType() == CellType.EMPTY) {
                             s.append(" ");
-                        } else if (map.getCell(i,j).getType() == CellType.WALL) {
+                        } else if (map.getCell(j, i).getType() == CellType.WALL) {
                             s.append('#');
-                        } else if (map.getCell(i,j).getType() == CellType.TREE) {
+                        } else if (map.getCell(j, i).getType() == CellType.TREE) {
                             s.append("t");
-                        } else if (map.getCell(i,j).getType() == CellType.FLOOR && map.getCell(i, j).getActor() instanceof Skeleton) {
+                        } else if (map.getCell(j, i).getType() == CellType.FLOOR && map.getCell(j, i).getActor() instanceof Skeleton) {
                             s.append("s");
-                        } else if (map.getCell(i,j).getType() == CellType.FLOOR && map.getCell(i, j).getItem() instanceof Sword) {
+                        } else if (map.getCell(j, i).getType() == CellType.FLOOR && map.getCell(j, i).getItem() instanceof Sword) {
                             s.append("z");
-                        } else if(map.getCell(i,j).getType() == CellType.FLOOR && map.getCell(i, j).getItem() instanceof Key) {
+                        } else if(map.getCell(j, i).getType() == CellType.FLOOR && map.getCell(j, i).getItem() instanceof Key) {
                             s.append("k");
-                        } else if (map.getCell(i,j).getType() == CellType.STAIRS) {
+                        } else if (map.getCell(j, i).getType() == CellType.STAIRS) {
                             s.append("-");
-                        } else if (map.getCell(i,j).getType() == CellType.FLOOR && map.getCell(i, j).getItem() instanceof Cross) {
+                        } else if (map.getCell(j, i).getType() == CellType.FLOOR && map.getCell(j, i).getItem() instanceof Cross) {
                             s.append("c");
-                        } else if (map.getCell(i,j).getType() == CellType.FLOOR && map.getCell(i, j).getItem() instanceof Crown) {
+                        } else if (map.getCell(j, i).getType() == CellType.FLOOR && map.getCell(j, i).getItem() instanceof Crown) {
                             s.append("x");
-                        } else if (map.getCell(i,j).getType() == CellType.FLOOR && map.getCell(i, j).getActor() instanceof Knight) {
+                        } else if (map.getCell(j, i).getType() == CellType.FLOOR && map.getCell(j, i).getActor() instanceof Knight) {
                             s.append("n");
-                        } else if (map.getCell(i,j).getType() == CellType.FLOOR && map.getCell(i, j).getActor() instanceof Monster) {
+                        } else if (map.getCell(j, i).getType() == CellType.FLOOR && map.getCell(j, i).getActor() instanceof Monster) {
                             s.append("m");
-                        } else if (map.getCell(i, j).getType() == CellType.CLOSED_DOOR) {
+                        } else if (map.getCell(j, i).getType() == CellType.CLOSED_DOOR) {
                             s.append("d");
-                        } else if (map.getCell(i, j).getType() == CellType.FIRE) {
+                        } else if (map.getCell(j, i).getType() == CellType.FIRE) {
                             s.append("f");
-                        } else if (map.getCell(i,j).getType() == CellType.FLOOR && map.getCell(i, j).getActor() instanceof Player) {
+                        } else if (map.getCell(j, i).getType() == CellType.FLOOR && map.getCell(j, i).getActor() instanceof Player) {
                             s.append("@");
-                        }  else if (map.getCell(i,j).getType() == CellType.FLOOR) {
+                        }  else if (map.getCell(j, i).getType() == CellType.FLOOR) {
                             s.append(".");
                         }
-                        if (j == 19) {
+                        if (j == 24) {
                             bufferedWriter.write(String.valueOf(s));
-                            System.out.println(String.valueOf(s));
+//                            System.out.println(String.valueOf(s));
                             bufferedWriter.newLine();
                             s.setLength(0);
-
                         }
                     }
                 }
