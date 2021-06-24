@@ -43,4 +43,8 @@ public class GameMap {
     public int getHeight() {
         return height;
     }
+
+    public void setCellType(CellType cellType, int x, int y) {
+        getCell(x, y).setType(cellType);
+    }
 }

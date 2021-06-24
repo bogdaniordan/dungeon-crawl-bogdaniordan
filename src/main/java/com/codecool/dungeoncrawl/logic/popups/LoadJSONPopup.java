@@ -57,12 +57,11 @@ public class LoadJSONPopup {
                     });
                 }
         );
+        cancelBtn.setOnAction(e -> {
+            Platform.runLater(popupWindow::close);
+        });
 
-//        cancelBtn.setOnAction(e -> {
-//            Platform.runLater(popupWindow::close);
-//        });
-
-        VBox layout= new VBox(10);
+        VBox layout = new VBox(10);
 
 
         layout.getChildren().addAll(label1, selectFileBtn);
