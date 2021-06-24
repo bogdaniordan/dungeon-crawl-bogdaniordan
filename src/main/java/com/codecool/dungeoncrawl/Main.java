@@ -1,5 +1,6 @@
 package com.codecool.dungeoncrawl;
 
+import com.codecool.dungeoncrawl.button.ExportButton;
 import com.codecool.dungeoncrawl.button.LoadButton;
 import com.codecool.dungeoncrawl.button.PickupHandler;
 import com.codecool.dungeoncrawl.dao.GameDatabaseManager;
@@ -105,6 +106,11 @@ public class Main extends Application {
         Button loadButton = new Button("Load game");
         loadButton.setOnAction(new LoadButton(dbManager));
         ui.add(loadButton, 0 , 60);
+
+
+        Button exportButton = new Button("Export game");
+        exportButton.setOnAction(new ExportButton(dbManager, map.getPlayer(), currentMap));
+        ui.add(exportButton, 0 , 100);
 
         borderPane.setCenter(canvas);
         borderPane.setRight(ui);

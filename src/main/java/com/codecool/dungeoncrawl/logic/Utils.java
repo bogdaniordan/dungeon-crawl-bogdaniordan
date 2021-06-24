@@ -89,15 +89,12 @@ public class Utils {
                         if (j == 19) {
                             bufferedWriter.write(String.valueOf(s));
                             System.out.println(String.valueOf(s));
-//                            myObj.write(System.getProperty("line.separator"));
                             bufferedWriter.newLine();
                             s.setLength(0);
 
                         }
                     }
                 }
-//                myObj.write(String.valueOf(s));
-//                myObj.close();
             bufferedWriter.close();
         } catch (IOException e) {
             System.out.println("An error occurred.");
