@@ -25,7 +25,7 @@ import java.io.Writer;
 import java.sql.Date;
 
 public class ExportLocationPopup {
-    public static <ObjectMapper> void display(Player player, GameMap gameMap) {
+    public static void display(Player player, GameMap gameMap) {
         Stage popupWindow = new Stage();
 
         popupWindow.initModality(Modality.APPLICATION_MODAL);
@@ -44,11 +44,11 @@ public class ExportLocationPopup {
 
                         Utils.writeMapToFile(gameMap, player.getName());
 
-
                         GameState gameState = new GameState("/" + playerModel.getPlayerName() + ".txt", new Date(System.currentTimeMillis()), playerModel);
                         InventoryState inventoryState = new InventoryState(player.getCrossesNumber(), player.getSwordsNumber(), player.getKeysNumber(), playerModel);
                         gameState.setInventoryState(inventoryState);
                         gameState.addDiscoveredMap("map.txt");
+
                         if (gameState.getCurrentMap().equals("/second_map.txt")) {
                             gameState.addDiscoveredMap("second_map.txt");
                         }

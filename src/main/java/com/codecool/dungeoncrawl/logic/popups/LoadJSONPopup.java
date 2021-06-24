@@ -52,8 +52,7 @@ public class LoadJSONPopup {
                                 fileNotFoundException.printStackTrace();
                             }
                         } else {
-                            System.out.println("D");
-//                            WrongFilePopup.display();
+                            WrongFilePopup.display();
                         }
                     });
                 }
