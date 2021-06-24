@@ -2,6 +2,7 @@ package com.codecool.dungeoncrawl;
 
 import com.codecool.dungeoncrawl.button.ExportButton;
 import com.codecool.dungeoncrawl.button.LoadButton;
+import com.codecool.dungeoncrawl.button.LoadJSONFile;
 import com.codecool.dungeoncrawl.button.PickupHandler;
 import com.codecool.dungeoncrawl.dao.GameDatabaseManager;
 import com.codecool.dungeoncrawl.logic.*;
@@ -66,15 +67,6 @@ public class Main extends Application {
     }
 
     public void run(Stage primaryStage, String name) {
-
-        System.out.println(map.getHeight());
-        System.out.println(map.getWidth());
-        for (int i = 0; i < map.getWidth(); i++) {
-            for (int j = 0; j < map.getHeight(); j++) {
-                System.out.println(map.getCell(i,j));
-            }
-        }
-
         setupDbManager();
         this.name = name;
 
@@ -109,8 +101,12 @@ public class Main extends Application {
 
 
         Button exportButton = new Button("Export game");
-        exportButton.setOnAction(new ExportButton(dbManager, map.getPlayer(), currentMap));
+        exportButton.setOnAction(new ExportButton(map.getPlayer(), map));
         ui.add(exportButton, 0 , 100);
+
+        Button loadFileButton = new Button("Load JSON");
+        loadFileButton.setOnAction(new LoadJSONFile());
+        ui.add(loadFileButton, 0 , 140);
 
         borderPane.setCenter(canvas);
         borderPane.setRight(ui);
@@ -158,14 +154,7 @@ public class Main extends Application {
     private void onKeyPressed(KeyEvent keyEvent) {
         moveEnemies();
         switch (keyEvent.getCode()) {
-            case Q:
-                map = MapLoader.loadMap("/filename.txt");
-                fight = new Fight(map);
-                movement = new Movement(map, fight);
-                Main main = new Main();
-                main.run(new Stage(), "ficus");
             case UP:
-                Utils.writeMapToFile(map, "ll");
                 if (movement.movementCheck(0, - 1) || name.equals("Bogdan")) {
                     map.getPlayer().move(0, - 1);
                     teleportToSecondMap(map.getPlayer().getHealth(), map.getPlayer().getInventory(),map.getPlayer().getDamage());
@@ -195,7 +184,7 @@ public class Main extends Application {
                 break;
             case S:
                 Player player = map.getPlayer();
-                SavePopup.display(name, dbManager, player, currentMap);
+                SavePopup.display(name, dbManager, player, map);
                 break;
         }
     }

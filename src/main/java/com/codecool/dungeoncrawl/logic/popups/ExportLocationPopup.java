@@ -1,6 +1,8 @@
 package com.codecool.dungeoncrawl.logic.popups;
 
 import com.codecool.dungeoncrawl.dao.GameDatabaseManager;
+import com.codecool.dungeoncrawl.logic.GameMap;
+import com.codecool.dungeoncrawl.logic.Utils;
 import com.codecool.dungeoncrawl.logic.actors.Player;
 import com.codecool.dungeoncrawl.model.GameState;
 import com.codecool.dungeoncrawl.model.InventoryState;
@@ -23,7 +25,7 @@ import java.io.Writer;
 import java.sql.Date;
 
 public class ExportLocationPopup {
-    public static <ObjectMapper> void display(GameDatabaseManager databaseManager, Player player, String currentMap) {
+    public static <ObjectMapper> void display(Player player, GameMap gameMap) {
         Stage popupWindow = new Stage();
 
         popupWindow.initModality(Modality.APPLICATION_MODAL);
@@ -39,7 +41,11 @@ public class ExportLocationPopup {
         button.setOnAction(e -> {
                     Platform.runLater(() -> {
                         PlayerModel playerModel = new PlayerModel(player);
-                        GameState gameState = new GameState(currentMap, new Date(System.currentTimeMillis()), playerModel);
+
+                        Utils.writeMapToFile(gameMap, player.getName());
+
+
+                        GameState gameState = new GameState("/" + playerModel.getPlayerName() + ".txt", new Date(System.currentTimeMillis()), playerModel);
                         InventoryState inventoryState = new InventoryState(player.getCrossesNumber(), player.getSwordsNumber(), player.getKeysNumber(), playerModel);
                         gameState.setInventoryState(inventoryState);
                         gameState.addDiscoveredMap("map.txt");

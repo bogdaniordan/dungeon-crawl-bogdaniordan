@@ -41,7 +41,6 @@ public class Utils {
         try {
             System.out.println("Writing map to file...");
             FileWriter myObj = new FileWriter("src/main/resources/" + filename + ".txt");
-//            FileWriter myObj = new FileWriter("src/main/resources/filename.txt");
             BufferedWriter bufferedWriter = new BufferedWriter(myObj);
                 StringBuilder s = new StringBuilder();
                 s.append(map.getWidth());
@@ -59,15 +58,17 @@ public class Utils {
                             s.append('#');
                         } else if (map.getCell(j, i).getType() == CellType.TREE) {
                             s.append("t");
+                        } else if (map.getCell(j, i).getType() == CellType.OPEN_DOOR) {
+                           s.append("g");
+                        } else if (map.getCell(j, i).getType() == CellType.STAIRS) {
+                            s.append("-");
                         } else if (map.getCell(j, i).getType() == CellType.FLOOR && map.getCell(j, i).getActor() instanceof Skeleton) {
                             s.append("s");
                         } else if (map.getCell(j, i).getType() == CellType.FLOOR && map.getCell(j, i).getItem() instanceof Sword) {
                             s.append("z");
                         } else if(map.getCell(j, i).getType() == CellType.FLOOR && map.getCell(j, i).getItem() instanceof Key) {
                             s.append("k");
-                        } else if (map.getCell(j, i).getType() == CellType.STAIRS) {
-                            s.append("-");
-                        } else if (map.getCell(j, i).getType() == CellType.FLOOR && map.getCell(j, i).getItem() instanceof Cross) {
+                        }  else if (map.getCell(j, i).getType() == CellType.FLOOR && map.getCell(j, i).getItem() instanceof Cross) {
                             s.append("c");
                         } else if (map.getCell(j, i).getType() == CellType.FLOOR && map.getCell(j, i).getItem() instanceof Crown) {
                             s.append("x");
@@ -86,7 +87,6 @@ public class Utils {
                         }
                         if (j == 24) {
                             bufferedWriter.write(String.valueOf(s));
-//                            System.out.println(String.valueOf(s));
                             bufferedWriter.newLine();
                             s.setLength(0);
                         }

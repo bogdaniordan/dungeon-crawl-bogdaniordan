@@ -1,6 +1,8 @@
 package com.codecool.dungeoncrawl.logic.popups;
 
 import com.codecool.dungeoncrawl.dao.GameDatabaseManager;
+import com.codecool.dungeoncrawl.logic.GameMap;
+import com.codecool.dungeoncrawl.logic.Utils;
 import com.codecool.dungeoncrawl.logic.actors.Player;
 import com.codecool.dungeoncrawl.model.GameState;
 import com.codecool.dungeoncrawl.model.InventoryState;
@@ -18,7 +20,7 @@ import javafx.stage.Stage;
 import java.sql.Date;
 
 public class OverwritePopup {
-    public void display(GameDatabaseManager dbManager, PlayerModel playerModel, String currentMap, Player player)
+    public void display(GameDatabaseManager dbManager, PlayerModel playerModel, String currentMap, Player player, GameMap gameMap)
     {
         Stage popupWindow = new Stage();
 
@@ -42,10 +44,10 @@ public class OverwritePopup {
 
                         dbManager.updatePlayer(newPlayerModel);//update player
 
-                        //write file map with player's name
-                        // pass the new filemap as the currentMap
+                        //write file map with player's name as the file name
+                        Utils.writeMapToFile(gameMap, newPlayerModel.getPlayerName());
 
-                        GameState gameState = new GameState(currentMap, new Date(System.currentTimeMillis()), newPlayerModel);
+                        GameState gameState = new GameState("/" + newPlayerModel.getPlayerName() + ".txt", new Date(System.currentTimeMillis()), newPlayerModel);
 
                         InventoryState inventoryState = new InventoryState(player.getCrossesNumber(), player.getSwordsNumber(), player.getKeysNumber(), newPlayerModel);
                         inventoryState.setId(playerModel.getId());
@@ -60,7 +62,7 @@ public class OverwritePopup {
             //take input for player name
             //save new player
             // save new game state with new player saved id(maybe retrieve the player)
-            newSavePopup(dbManager, currentMap, player);
+            newSavePopup(dbManager, player, gameMap);
             popupWindow.close();
         });
 
@@ -79,7 +81,7 @@ public class OverwritePopup {
 
     }
 
-    private void newSavePopup(GameDatabaseManager dbManager, String currentMap, Player player) {
+    private void newSavePopup(GameDatabaseManager dbManager, Player player, GameMap gameMap) {
         Stage popupWindow = new Stage();
 
         popupWindow.initModality(Modality.APPLICATION_MODAL);
@@ -97,10 +99,10 @@ public class OverwritePopup {
                         player.setName(nameInput.getText());
                         PlayerModel playerModel = dbManager.savePlayer(player);
 
-                        //write file map with player's name
-                        // pass the new filemap as the currentMap
+                        //write file map with player's name as the filename
+                        Utils.writeMapToFile(gameMap, player.getName());
 
-                        dbManager.saveGameState(new GameState(currentMap, new Date(System.currentTimeMillis()), playerModel)); //save game state linked to the player id
+                        dbManager.saveGameState(new GameState("/" + player.getName() + ".txt", new Date(System.currentTimeMillis()), playerModel)); //save game state linked to the player id
                         dbManager.saveInventoryState(new InventoryState(player.getCrossesNumber(), player.getSwordsNumber(), player.getKeysNumber(), playerModel));
                         popupWindow.close();
                     });
