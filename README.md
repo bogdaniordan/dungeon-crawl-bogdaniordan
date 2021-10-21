@@ -15,7 +15,7 @@
 *** for contributors-url, forks-url, etc. This is an optional, concise syntax you may use.
 *** https://www.markdownguide.org/basic-syntax/#reference-style-links
 -->
-[![Contributors][contributors-shield]][contributors-url]
+<!-- [![Contributors][contributors-shield]][contributors-url]
 [![Forks][forks-shield]][forks-url]
 [![Stargazers][stars-shield]][stars-url]
 [![Issues][issues-shield]][issues-url]
@@ -23,7 +23,7 @@
 [![Github - Marius][github-marius-shield]][github-marius-url]
 [![Github - Razvan][github-razvan-shield]][github-razvan-url]
 
-
+ -->
 
 <!-- PROJECT LOGO -->
 <br />
@@ -79,77 +79,32 @@
 <!-- ABOUT THE PROJECT -->
 ## About The Project
 
-This is an exciting multiplayer strategy game for all Pokemon fans out there, and a way for them to directly interact online.
+This is a dungeon crawl based game where player can fight enemies, collect potions and advance to new levels.
 
 Here's why:
-* Poke Battlez is the place where you can meet online and chat as a group.
-* You can send PMs to any other user, for those private thoughts or invitations for direct challenges.
-* You can use all your Pokemon skills and knowledge in configuring and modifying your own team of pokemons, up to 6 of them.
-* You can challenge any other user for a 1 to 1 battle.
-* You can execute a battle where you can test your customized team together with your best Pokemon battle strategies.
-
-Of course, all Pokemon are available to you, together with a comprehensive list of characteristics you can customize, thanks to the Pokemon API used, more details in acknowledgements 
+* Movement is tile based.
+* Players can collect different items into their inventory. Those items offers various stats.
+* Players can fight moving or static enemies.
+* Fighters can advance to undiscovered levels.
+* Players can save or load their game from a PSQL database or a JSON file.
 
 ### Built With
 
-#### Backend
-* [Spring Boot (WebSocket/JPA)](https://spring.io/projects/spring-boot)
-* [Lombok](https://projectlombok.org/)
-* [H2 DataBase](https://www.h2database.com/html/main.html)
-
-
-#### Frontend
-* [React](https://reactjs.org/)
-* [React-Bootstrap](https://react-bootstrap.github.io/)
-* [npm](https://www.npmjs.com/)
+#### Game
+* [Java](https://www.java.com/en/)
+* [JavaFX](https://openjfx.io/)
+* [PostgreSQL](https://www.postgresql.org/docs/13/app-psql.html)
 
 #### Version control
 * [Github](https://www.gtihub.com/)
 
 #### Project Management
-* [Jira Software](https://www.atlassian.com/software/jira?&aceid=&adposition=&adgroup=89541897982&campaign=9124878150&creative=415542514747&device=c&keyword=jira&matchtype=e&network=g&placement=&ds_kids=p51242161283&ds_e=GOOGLE&ds_eid=700000001558501&ds_e1=GOOGLE&gclid=Cj0KCQiAnKeCBhDPARIsAFDTLTIUjm6m9LQssN_d15V_dYNqPiWaS_df09mdcnHPj-QkqTKrZfAjB6kaAhdEEALw_wcB&gclsrc=aw.ds)
+* [Trello](https://www.atlassian.com/software/jira?&aceid=&adposition=&adgroup=89541897982&campaign=9124878150&creative=415542514747&device=c&keyword=jira&matchtype=e&network=g&placement=&ds_kids=p51242161283&ds_e=GOOGLE&ds_eid=700000001558501&ds_e1=GOOGLE&gclid=Cj0KCQiAnKeCBhDPARIsAFDTLTIUjm6m9LQssN_d15V_dYNqPiWaS_df09mdcnHPj-QkqTKrZfAjB6kaAhdEEALw_wcB&gclsrc=aw.ds)
 
 
 
 <!-- GETTING STARTED -->
 ## Getting Started
-
-This application can be tested by installing all prerequisites, clone both the back end and the client app, running them and enjoy!
-
-### Prerequisites
-
-All prerequisites must be installed, accordingly to the technologies used in this project, for example:
-* npm
-  ```sh
-  npm install npm@latest -g
-  ```
-
-### Installation
-
-* Backend
-
-1. Clone the repo
-   ```sh
-   git clone https://github.com/marius-ceobanu/Poke-Battlez-Backend.git
-   ```
-2. Run the server
-
-* Frontend
-
-1. Clone the repo
-   ```sh
-   git clone https://github.com/marius-ceobanu/Poke-Battlez-Frontend.git
-   ```
-2. Install NPM packages
-   ```sh
-   npm install
-   ```
-3. Run the app
-   ```
-    npm start
-   ```
-
-
 
 <!-- USAGE EXAMPLES -->
 ## Usage
@@ -186,16 +141,12 @@ Further we will shortly name, describe and visualize some main features of the a
 <!-- ROADMAP -->
 ## Roadmap
 
-The project development took place through 4 Agile iterations, each iteration taking 4 days, and presenting the results in the 5th. A short complete roadmap bellow:
+The project development took place through 2 Agile iterations, each iteration taking 4 days, and presenting the results in the 5th. A short complete roadmap bellow:
 
 [![agile][agile]]()
 
-* Sprint 1: Implementing main Lobby (Group chat, Online users, Login System)
-* Spring 2: Implementing Team configuration / PM messaging / Send and Receive Challenge
-* Sprint 3: Implementing Accept Challenge / Battle page / Battle Logic
-* Sprint 4: Refactoring Battle service / Unit Testing / Secure User Login system
-
-
+* Sprint 1: Implementing game functionalities (Movement, Items, Enemy fights)
+* Spring 2: Implementing save and load functionalities / (Load, save, export)
 
 
 <!-- CONTRIBUTING -->
@@ -213,19 +164,12 @@ Contributions are what make the open source community such an amazing place to b
 <!-- CONTACT -->
 ## Contact
 
-Marius Ceobanu - [@My Github](https://github.com/marius-ceobanu) [@My LinkedIn](https://www.linkedin.com/in/marius-ciprian-ceobanu-3431157b) - ceobanu.marius@gmail.com
-
-Razvan Grigore - [@My Github](https://github.com/rgrigore) - razvang95@gmail.com
+Bogdan Iordan - [@My Github](https://github.com/bogdaniordan) [@My LinkedIn](https://www.linkedin.com/in/bogdan-iordan/) - bogdan.iordan47@gmail.com
 
 
 <!-- ACKNOWLEDGEMENTS -->
 ## Acknowledgements
-* [Spring Documentation](https://docs.spring.io/)
-* [React Documentation](https://reactjs.org/)
-* [PokeApi](https://pokeapi.co/)
-* [Bulbapedia](https://bulbapedia.bulbagarden.net/wiki/Main_Page)
 * [Codecool Romania :thumbsup:](https://codecool.com/ro/)
-* [Img Shields](https://shields.io)
 
 
 <!-- MARKDOWN LINKS & IMAGES -->
