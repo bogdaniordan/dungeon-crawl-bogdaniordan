@@ -1,119 +1,255 @@
-# Dungeon Crawl (sprint 1)
-
-## Story
-
-[Roguelikes](https://en.wikipedia.org/wiki/Roguelike) are one of the oldest
-types of video games, the earliest ones were made in the 70s, they were inspired
-a lot by tabletop RPGs. Roguelikes have the following in common usually:
-
-- They are tile-based.
-- The game is divided into turns, e.g. you make one action, then the other
-  entities (monsters, allies, etc. controlled by the CPU) make one.
-- Usually the task is to explore a labyrinth and retrieve some treasure from its
-  bottom.
-- They feature permadeath: if you die its game over, you need to start from the
-  beginning again.
-- Are heavily using procedural generation: Levels, monster placement, items,..
-  are randomized, so the game does not get boring.
-
-Your task will be to create a roguelike! You can deviate from the rules above,
-the important bit is that it should be fun!
-
-## What are you going to learn?
-
-- Get more practice in OOP
-- Design patterns: layer separation (All of the game logic, i.e., player
-  movement, game rules, and so on), is in the `logic` package, completely
-  independent of user interface code. In principle, you could implement a
-  completely different interface e.g. terminal, web, Virtual Reality, etc. for
-  the same logic code.)
-
-## Tasks
-
-1. Understand the existing code, classes and tests so you can make changes. You should do this before planning everything else. It will help you understand what is going on.
-    - Student has a class diagram in a digialized format which 
-- contains enums, classes, interfaces with all fields, methods
-- show connections between classes: inheritance, aggregation, composition
-- show multiplicity of connections (1..1, 1..*, *..*)
-
-2. Create a game logic which restricts the movement of the player so s/he cannot run into walls and monsters.
-    - The hero is not able to move into walls.
-    - The hero is not able to move into monsters.
-
-3. There are items lying around the dungeon. They are visible in the GUI.
-    - There are at least 2 item types, for instance a key, and a sword.
-    - There can be one item in a map square.
-    - A player can stand on the same square as an item.
-    - The item has to be displayed on screen (unless somebody stands on the same square)
-
-4. Create a feature that allows the hero to pick up an item.
-    - There is a "Pick up" button on the right side of screen.
-    - After the player clicks the button, the item the hero is standing on should be gone from map.
-
-5. Show picked up items in the inventory list.
-    - There is an `Inventory` list on the screen.
-    - After the hero picks up an item, it should appear in inventory.
-
-6. Make the hero to able to attack monsters by moving into them.
-    - Attacking a monster removes 5 health points. If health of a monster goes below 0, it dies and disappears.
-    - Create a feature where the hero attack a monster, and it doesn't die, it also attacks the hore at the same time (but is a bit weaker, and only removes 2 health).
-    - Having a weapon should increase your attack strength.
-    - Different monsters have different health and attack strength.
-
-7. Create doors in the dungeon that open by using keys.
-    - There are two new square types, closed door, and open door.
-    - The hero cannot pass through a closed door, unless it has a key in his/her inventory. Then it becomes an open door.
-
-8. Create three different monster types with different behaviors.
-    - There are at least three different monster types with different behaviors.
-    - One type of monster does not move at all.
-    - One type of monster moves randomly. It cannot go trough walls or open doors.
-
-9. [OPTIONAL] Create a more sophisticated movement AI.
-    - One type of monster moves around randomly and teleports to a random free square every few turns.
-    - A custom movement logic is implemented (like Ghosts that can move trough walls, monster that chases the player, etc.)
-
-10. Create maps that have more varied scenery. Take a look at the tile sheet (tiles.png). Get inspired!
-    - At least three more tiles are used. These can be more monsters, items, or background. At least one of them has to be not purely decorative, but have some effect on gameplay.
-
-11. [OPTIONAL] Allow the player to set a name for my character. This name will also function as a cheat code!
-    - There is a `Name` label and text field on the screen.
-    - If the name given is one of the game developers' name, the player can walk through walls.
-
-12. [OPTIONAL] Make the game sound fun by implementing audio effects, when player or enemies do stuff
-    - There is a footstep sound, that plays, whenever the player takes a step
-    - There is an attack sound, whenever player and/or an enemy attacks someone This sound might vary depending on the weapon (sword, axe, arrow)
-    - Enemies such as skeletons or ghosts play characteristic sounds randomly every few seconds
-    - Add some background music to your game!
-
-13. Add the possibility to add more levels.
-    - There are at least two levels.
-    - There is a square type "stairs down". Entering this square moves the player to a different map.
-
-14. Implement bigger levels than the game window.
-    - Levels are larger than the game window (for example 3 screens wide and 3 screens tall).
-    - When the player moves the player character stays in the center of the view.
-
-## General requirements
-
-None
-
-## Hints
-
-- Start with the smaller tasks, and then move into the more difficult ones
-- Before making any changes make sure you understand the whole starting code
-- Open the project in IntelliJ IDEA. This is a Maven project, so you will need to
-open `pom.xml`. The project is using JavaFX, use the `javafx` maven plugin to
-build and run the program. Build: `mvn javafx:compile`, run: `mvn javafx:run`.
-- You don't need to dwelve into JavaFX's technicalities much, most of the GUI is ready
+<!--
+*** Thanks for checking out the Best-README-Template. If you have a suggestion
+*** that would make this better, please fork the repo and create a pull request
+*** or simply open an issue with the tag "enhancement".
+*** Thanks again! Now go create something AMAZING! :D
+-->
 
 
-## Background materials
 
-- <i class="far fa-book-open"></i> [RogueBasin, a wiki with lots of resources on Roguelike creation](http://roguebasin.com/index.php?title=Articles)
-- <i class="far fa-exclamation"></i> [Basics of OOP](project/curriculum/materials/pages/oop/basics-of-object-oriented-programming.md)
-- <i class="far fa-exclamation"></i> [UML diagrams](project/curriculum/materials/pages/general/uml-unified-modeling-language.md)
-- <i class="far fa-exclamation"></i> [How to design classes](project/curriculum/materials/pages/java/how-to-design-classes.md)
-- <i class="far fa-book-open"></i> [JavaFX](https://en.wikipedia.org/wiki/JavaFX)
-- <i class="far fa-book-open"></i> [JavaFX Tutorial](http://tutorials.jenkov.com/javafx/index.html)
-- [1-Bit Pack by Kenney](https://kenney.nl/assets/bit-pack)
+<!-- PROJECT SHIELDS -->
+<!--
+*** I'm using markdown "reference style" links for readability.
+*** Reference links are enclosed in brackets [ ] instead of parentheses ( ).
+*** See the bottom of this document for the declaration of the reference variables
+*** for contributors-url, forks-url, etc. This is an optional, concise syntax you may use.
+*** https://www.markdownguide.org/basic-syntax/#reference-style-links
+-->
+[![Contributors][contributors-shield]][contributors-url]
+[![Forks][forks-shield]][forks-url]
+[![Stargazers][stars-shield]][stars-url]
+[![Issues][issues-shield]][issues-url]
+[![LinkedIn - Marius][linkedin-shield]][linkedin-marius-url]
+[![Github - Marius][github-marius-shield]][github-marius-url]
+[![Github - Razvan][github-razvan-shield]][github-razvan-url]
+
+
+
+<!-- PROJECT LOGO -->
+<br />
+<p align="center">
+  <a href="https://github.com/marius-ceobanu/Poke-Battlez-Frontend/tree/project_documentation.git">
+    <img src="doc_images/pokelogo.png" alt="Logo" width="300">
+  </a>
+
+  <h3 align="center">Poke Battlez</h3>
+
+  <p align="center">
+    An awesome web multiplayer game for Pokemon fans!
+    <br />
+    <a href="https://github.com/marius-ceobanu/Poke-Battlez-Frontend.git"><strong>Explore the docs »</strong></a>
+    <br />
+    <br />
+    <a href="https://github.com/marius-ceobanu/Poke-Battlez-Frontend.git">View Demo</a>
+    ·
+    <a href="https://github.com/marius-ceobanu/Poke-Battlez-Frontend/issues">Report Bug</a>
+    ·
+    <a href="https://github.com/marius-ceobanu/Poke-Battlez-Frontend/issues">Request Feature</a>
+  </p>
+
+
+
+<!-- TABLE OF CONTENTS -->
+<details open="open">
+  <summary>Table of Contents</summary>
+  <ol>
+    <li>
+      <a href="#about-the-project">About The Project</a>
+      <ul>
+        <li><a href="#built-with">Built With</a></li>
+      </ul>
+    </li>
+    <li>
+      <a href="#getting-started">Getting Started</a>
+      <ul>
+        <li><a href="#prerequisites">Prerequisites</a></li>
+        <li><a href="#installation">Installation</a></li>
+      </ul>
+    </li>
+    <li><a href="#usage">Usage</a></li>
+    <li><a href="#roadmap">Roadmap</a></li>
+    <li><a href="#contributing">Contributing</a></li>
+    <li><a href="#contact">Contact</a></li>
+    <li><a href="#acknowledgements">Acknowledgements</a></li>
+  </ol>
+</details>
+
+
+
+<!-- ABOUT THE PROJECT -->
+## About The Project
+
+This is an exciting multiplayer strategy game for all Pokemon fans out there, and a way for them to directly interact online.
+
+Here's why:
+* Poke Battlez is the place where you can meet online and chat as a group.
+* You can send PMs to any other user, for those private thoughts or invitations for direct challenges.
+* You can use all your Pokemon skills and knowledge in configuring and modifying your own team of pokemons, up to 6 of them.
+* You can challenge any other user for a 1 to 1 battle.
+* You can execute a battle where you can test your customized team together with your best Pokemon battle strategies.
+
+Of course, all Pokemon are available to you, together with a comprehensive list of characteristics you can customize, thanks to the Pokemon API used, more details in acknowledgements 
+
+### Built With
+
+#### Backend
+* [Spring Boot (WebSocket/JPA)](https://spring.io/projects/spring-boot)
+* [Lombok](https://projectlombok.org/)
+* [H2 DataBase](https://www.h2database.com/html/main.html)
+
+
+#### Frontend
+* [React](https://reactjs.org/)
+* [React-Bootstrap](https://react-bootstrap.github.io/)
+* [npm](https://www.npmjs.com/)
+
+#### Version control
+* [Github](https://www.gtihub.com/)
+
+#### Project Management
+* [Jira Software](https://www.atlassian.com/software/jira?&aceid=&adposition=&adgroup=89541897982&campaign=9124878150&creative=415542514747&device=c&keyword=jira&matchtype=e&network=g&placement=&ds_kids=p51242161283&ds_e=GOOGLE&ds_eid=700000001558501&ds_e1=GOOGLE&gclid=Cj0KCQiAnKeCBhDPARIsAFDTLTIUjm6m9LQssN_d15V_dYNqPiWaS_df09mdcnHPj-QkqTKrZfAjB6kaAhdEEALw_wcB&gclsrc=aw.ds)
+
+
+
+<!-- GETTING STARTED -->
+## Getting Started
+
+This application can be tested by installing all prerequisites, clone both the back end and the client app, running them and enjoy!
+
+### Prerequisites
+
+All prerequisites must be installed, accordingly to the technologies used in this project, for example:
+* npm
+  ```sh
+  npm install npm@latest -g
+  ```
+
+### Installation
+
+* Backend
+
+1. Clone the repo
+   ```sh
+   git clone https://github.com/marius-ceobanu/Poke-Battlez-Backend.git
+   ```
+2. Run the server
+
+* Frontend
+
+1. Clone the repo
+   ```sh
+   git clone https://github.com/marius-ceobanu/Poke-Battlez-Frontend.git
+   ```
+2. Install NPM packages
+   ```sh
+   npm install
+   ```
+3. Run the app
+   ```
+    npm start
+   ```
+
+
+
+<!-- USAGE EXAMPLES -->
+## Usage
+
+Further we will shortly name, describe and visualize some main features of the app.
+
+### Lobby
+* In order to connect to the main server, there is necessary to register or login.
+
+[![register-png][register-png]]()
+[![login-png][login-png]]()
+[![login-gif][login-gif]]()
+
+* Here all users join a common "room", where they can check who is online, and they can chat, either on  the main chat, or send PM to specific users.
+
+[![chat-png][chat-png]]()
+
+* Click on any user and see the private actions you can take towards that specific user.
+
+[![PM-gif][PM-gif]]()
+
+* Using the button in the header, you open the TEAM configuration modal, where you can configure all your Pokemon slots, with actual characters and with detailed criteria as seen bellow:
+
+[![team-gif][team-gif]]()
+
+* Select the user you want to engage into battle and by pressing the challenge button, you will be transferred on a private room with him/her, where you can chat or execute the battle.
+
+[![challenge-gif][challenge-gif]]()
+[![battle-gif][battle-gif]]()
+
+### Battle
+* The battle is turn based, with the player being able to select the Pokemon, and the move which to be executed against the adversary Pokemon. Once both players "locked" their own moves, they will get a log response with the results of the turn, and impacting their Pokemon health accordingly. You can also swith between your Pokemon team at any time.
+
+<!-- ROADMAP -->
+## Roadmap
+
+The project development took place through 4 Agile iterations, each iteration taking 4 days, and presenting the results in the 5th. A short complete roadmap bellow:
+
+[![agile][agile]]()
+
+* Sprint 1: Implementing main Lobby (Group chat, Online users, Login System)
+* Spring 2: Implementing Team configuration / PM messaging / Send and Receive Challenge
+* Sprint 3: Implementing Accept Challenge / Battle page / Battle Logic
+* Sprint 4: Refactoring Battle service / Unit Testing / Secure User Login system
+
+
+
+
+<!-- CONTRIBUTING -->
+## Contributing
+
+Contributions are what make the open source community such an amazing place to be learn, inspire, and create. Any contributions you make are **greatly appreciated**.
+
+1. Fork the Project
+2. Create your Feature Branch (`git checkout -b feature/AmazingFeature`)
+3. Commit your Changes (`git commit -m 'Add some AmazingFeature'`)
+4. Push to the Branch (`git push origin feature/AmazingFeature`)
+5. Open a Pull Request
+
+
+<!-- CONTACT -->
+## Contact
+
+Marius Ceobanu - [@My Github](https://github.com/marius-ceobanu) [@My LinkedIn](https://www.linkedin.com/in/marius-ciprian-ceobanu-3431157b) - ceobanu.marius@gmail.com
+
+Razvan Grigore - [@My Github](https://github.com/rgrigore) - razvang95@gmail.com
+
+
+<!-- ACKNOWLEDGEMENTS -->
+## Acknowledgements
+* [Spring Documentation](https://docs.spring.io/)
+* [React Documentation](https://reactjs.org/)
+* [PokeApi](https://pokeapi.co/)
+* [Bulbapedia](https://bulbapedia.bulbagarden.net/wiki/Main_Page)
+* [Codecool Romania :thumbsup:](https://codecool.com/ro/)
+* [Img Shields](https://shields.io)
+
+
+<!-- MARKDOWN LINKS & IMAGES -->
+<!-- https://www.markdownguide.org/basic-syntax/#reference-style-links -->
+[contributors-shield]: https://img.shields.io/badge/Contributers-2-brightgreen
+[contributors-url]: https://github.com/marius-ceobanu/Poke-Battlez-Frontend/graphs/contributors
+[forks-shield]: https://img.shields.io/badge/Forks-0-blue
+[forks-url]: https://github.com/marius-ceobanu/Poke-Battlez-Frontend/network/members
+[stars-shield]: https://img.shields.io/badge/Stars-2-blue
+[stars-url]: https://github.com/marius-ceobanu/Poke-Battlez-Frontend/stargazers
+[issues-shield]: https://img.shields.io/github/issues/marius-ceobanu/Poke-Battlez-Frontend
+[issues-url]: https://github.com/marius-ceobanu/Poke-Battlez-Frontend/issues
+[linkedin-shield]: https://img.shields.io/twitter/url?label=Linkedin%20-%20Marius&logo=LINKEDIN&style=social&url=https%3A%2F%2Fwww.linkedin.com%2Fin%2Fmarius-ciprian-ceobanu-3431157b
+[linkedin-marius-url]: https://www.linkedin.com/in/marius-ciprian-ceobanu-3431157b
+[github-marius-shield]: https://img.shields.io/twitter/url?label=GitHub%20-%20Marius&logo=Github&style=social&url=https%3A%2F%2Fgithub.com%2Fmarius-ceobanu
+[github-marius-url]: https://github.com/marius-ceobanu
+[github-razvan-shield]: https://img.shields.io/twitter/url?label=GitHub%20-%20Razvan&logo=Github&style=social&url=https%3A%2F%2Fgithub.com%2Frgrigore
+[github-razvan-url]: https://github.com/rgrigore
+[chat-png]: doc_images/chat.png
+[register-png]: doc_images/register.png
+[login-png]: doc_images/login.png
+[login-gif]: doc_images/login.gif
+[PM-gif]: doc_images/PM.gif
+[team-gif]: doc_images/team.gif
+[challenge-gif]: doc_images/challenge.gif
+[battle-gif]: doc_images/battle.gif
+[agile]: doc_images/agile-logo.png
