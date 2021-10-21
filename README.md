@@ -28,11 +28,11 @@
 <!-- PROJECT LOGO -->
 <br />
 <p align="center">
-  <a href="https://github.com/marius-ceobanu/Poke-Battlez-Frontend/tree/project_documentation.git">
-    <img src="doc_images/pokelogo.png" alt="Logo" width="300">
+  <a href="https://github.com/bogdaniordan/dungeon-crawl-bogdaniordan">
+    <img src="https://w7.pngwing.com/pngs/216/452/png-transparent-dungeons-dragons-dungeon-crawl-episode-logo-others-logo-clarabelle-cow-casting.png" alt="Logo" width="300">
   </a>
 
-  <h3 align="center">Poke Battlez</h3>
+  <h3 align="center">Dungeon crawl</h3>
 
   <p align="center">
     An awesome web multiplayer game for Pokemon fans!
