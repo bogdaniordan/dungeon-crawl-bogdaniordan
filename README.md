@@ -122,21 +122,7 @@ Further we will shortly name, describe and visualize some main features of the a
 * The player can pick up keys and avoid spikes to get to another level. 
 * The game ends if the user reaches 0 health points which results in a loss, or it can turn into a win if the player picks up the crown.
 
-<!-- ![Screenshot from 2021-10-21 12-43-25](https://user-images.githubusercontent.com/72221647/138440662-9290665b-9cf3-446e-9aa9-b1aba0cad108.png)
-
-
-* Using the button in the header, you open the TEAM configuration modal, where you can configure all your Pokemon slots, with actual characters and with detailed criteria as seen bellow:
-
-[![team-gif][team-gif]]()
-
-* Select the user you want to engage into battle and by pressing the challenge button, you will be transferred on a private room with him/her, where you can chat or execute the battle.
-
-[![challenge-gif][challenge-gif]]()
-[![battle-gif][battle-gif]]()
-
-### Battle
-* The battle is turn based, with the player being able to select the Pokemon, and the move which to be executed against the adversary Pokemon. Once both players "locked" their own moves, they will get a log response with the results of the turn, and impacting their Pokemon health accordingly. You can also swith between your Pokemon team at any time.
- -->
+![Screenshot from 2021-10-21 12-43-25](https://user-images.githubusercontent.com/72221647/138440662-9290665b-9cf3-446e-9aa9-b1aba0cad108.png)
 <!-- ROADMAP -->
 ## Roadmap
 
