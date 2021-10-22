@@ -29,22 +29,22 @@
 <br />
 <p align="center">
   <a href="https://github.com/bogdaniordan/dungeon-crawl-bogdaniordan">
-    <img src="https://w7.pngwing.com/pngs/216/452/png-transparent-dungeons-dragons-dungeon-crawl-episode-logo-others-logo-clarabelle-cow-casting.png" alt="Logo" width="300">
+    <img src="https://lh3.googleusercontent.com/proxy/T9WYyPrEUkcNfjJtG8JLk-jEC4va_6Xyyu7rin_3cimbbxPtaxsDeq1Mz8dapJoWgYt512NG_bHI9Q_liwT2OBEbaTzepF5iPcGtszgsIO9jykE-QOKv4tto4xRY" alt="Logo" width="300">
   </a>
 
   <h3 align="center">Dungeon crawl</h3>
 
   <p align="center">
-    An awesome web multiplayer game for Pokemon fans!
+    An awesome rogue like game for dungeon crawl fans.
     <br />
-    <a href="https://github.com/marius-ceobanu/Poke-Battlez-Frontend.git"><strong>Explore the docs »</strong></a>
+    <a href="https://github.com/bogdaniordan/dungeon-crawl-bogdaniordan"><strong>Explore the docs »</strong></a>
     <br />
     <br />
-    <a href="https://github.com/marius-ceobanu/Poke-Battlez-Frontend.git">View Demo</a>
+    <a href="https://github.com/bogdaniordan/dungeon-crawl-bogdaniordan">View Demo</a>
     ·
-    <a href="https://github.com/marius-ceobanu/Poke-Battlez-Frontend/issues">Report Bug</a>
+    <a href="https://github.com/bogdaniordan/dungeon-crawl-bogdaniordan/issues">Report Bug</a>
     ·
-    <a href="https://github.com/marius-ceobanu/Poke-Battlez-Frontend/issues">Request Feature</a>
+    <a href="https://github.com/bogdaniordan/dungeon-crawl-bogdaniordan/issues">Request Feature</a>
   </p>
 
 
@@ -61,10 +61,6 @@
     </li>
     <li>
       <a href="#getting-started">Getting Started</a>
-      <ul>
-        <li><a href="#prerequisites">Prerequisites</a></li>
-        <li><a href="#installation">Installation</a></li>
-      </ul>
     </li>
     <li><a href="#usage">Usage</a></li>
     <li><a href="#roadmap">Roadmap</a></li>
@@ -106,25 +102,28 @@ Here's why:
 <!-- GETTING STARTED -->
 ## Getting Started
 
+Start your Java IDE and run the project build.
+
 <!-- USAGE EXAMPLES -->
 ## Usage
 
 Further we will shortly name, describe and visualize some main features of the app.
 
-### Lobby
-* In order to connect to the main server, there is necessary to register or login.
+### Game
+* Game movement is tile based, up, down, right or left.
+* There different inventory items which can be picked up and offer various stats.
+* Moving and static enemies can be fought along the maps.
+![Screenshot from 2021-10-21 12-42-16](https://user-images.githubusercontent.com/72221647/138439923-83d557d9-16cb-41f3-bc11-21954b5c851f.png)
 
-[![register-png][register-png]]()
-[![login-png][login-png]]()
-[![login-gif][login-gif]]()
+* Saved game can be exported and loaded from a JSON file or from a PSQL database.
 
-* Here all users join a common "room", where they can check who is online, and they can chat, either on  the main chat, or send PM to specific users.
+![Screenshot from 2021-10-21 12-42-42](https://user-images.githubusercontent.com/72221647/138440410-27aa31b9-8919-46b6-9c3f-f39fb0d4e4f8.png)
 
-[![chat-png][chat-png]]()
+* The player can pick up keys and avoid spikes to get to another level. 
+* The game ends if the user reaches 0 health points which results in a loss, or it can turn into a win if the player picks up the crown.
 
-* Click on any user and see the private actions you can take towards that specific user.
+<!-- ![Screenshot from 2021-10-21 12-43-25](https://user-images.githubusercontent.com/72221647/138440662-9290665b-9cf3-446e-9aa9-b1aba0cad108.png)
 
-[![PM-gif][PM-gif]]()
 
 * Using the button in the header, you open the TEAM configuration modal, where you can configure all your Pokemon slots, with actual characters and with detailed criteria as seen bellow:
 
@@ -137,13 +136,13 @@ Further we will shortly name, describe and visualize some main features of the a
 
 ### Battle
 * The battle is turn based, with the player being able to select the Pokemon, and the move which to be executed against the adversary Pokemon. Once both players "locked" their own moves, they will get a log response with the results of the turn, and impacting their Pokemon health accordingly. You can also swith between your Pokemon team at any time.
-
+ -->
 <!-- ROADMAP -->
 ## Roadmap
 
 The project development took place through 2 Agile iterations, each iteration taking 4 days, and presenting the results in the 5th. A short complete roadmap bellow:
 
-[![agile][agile]]()
+![agile-logo](https://user-images.githubusercontent.com/72221647/138440913-f67be820-c3a8-46d2-a35c-1f847acb2c48.png)
 
 * Sprint 1: Implementing game functionalities (Movement, Items, Enemy fights)
 * Spring 2: Implementing save and load functionalities / (Load, save, export)
